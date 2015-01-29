@@ -88,7 +88,7 @@ namespace Cotizaciones.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    ModelState.AddModelError("", "Contraseña incorrecta.");
                     return View(model);
             }
         }
@@ -155,6 +155,11 @@ namespace Cotizaciones.Controllers
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
+                if (UserManager.FindByEmail(model.Email) != null)
+                {
+                    ModelState.AddModelError("Email", "Ya existe un usuario con correo " + model.Email);
+                    return View(model);
+                }
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
