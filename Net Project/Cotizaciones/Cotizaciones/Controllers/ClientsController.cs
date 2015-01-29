@@ -46,7 +46,7 @@ namespace Cotizaciones.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ClientId,Name,Location,Phone,Email")] Client client)
+        public ActionResult Create([Bind(Include = "ClientId,Name,LastName,Company,City,State,Country,Category")] Client client)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace Cotizaciones.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ClientId,Name,Location,Phone,Email")] Client client)
+        public ActionResult Edit([Bind(Include = "ClientId,Name,LastName,Company,City,State,Country,Category")] Client client)
         {
             if (ModelState.IsValid)
             {

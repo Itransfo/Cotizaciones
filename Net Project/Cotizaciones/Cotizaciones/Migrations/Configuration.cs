@@ -31,26 +31,20 @@ namespace Cotizaciones.Migrations
             //    );
             //
             AddUserAndRole(context);
-            context.Clients.AddOrUpdate(p => p.Name,
-            new Client
-            {
-                Name = "Debra Garcia",
-                Location = "Redmond",
-                Email = "debra@example.com",
-            },
-             new Client
-             {
-                 Name = "Thorsten Weinrich",
-                 Location = "Redmond",
-                 Email = "thorsten@example.com",
-             },
-             new Client
-             {
-                 Name = "Yuhong Li",
-                 Location = "Redmond",
-                 Email = "yuhong@example.com",
-             }
-         );
+            //context.Clients.AddOrUpdate(p => p.Name,
+            //new Client
+            //{
+            //    Name = "Juan Perez",
+            //    City = "D.F.",
+            //    Email = "jperez@ejemplo.com",
+            //},
+            // new Client
+            // {
+            //     Name = "José Franco",
+            //     City = "Cuernavaca",
+            //     Email = "jose.franco@outlook.com",
+            // }
+            //);
         }
 
         bool AddUserAndRole(Cotizaciones.Models.ApplicationDbContext context)
@@ -60,10 +54,14 @@ namespace Cotizaciones.Migrations
                 (new RoleStore<IdentityRole>(context));
             ir = rm.Create(new IdentityRole("admin"));
             ir = rm.Create(new IdentityRole("user"));
-            ir = rm.Create(new IdentityRole("sales"));
-            ir = rm.Create(new IdentityRole("logistics"));
-            ir = rm.Create(new IdentityRole("finance"));
-            ir = rm.Create(new IdentityRole("operations"));
+            ir = rm.Create(new IdentityRole("sales-admin"));
+            ir = rm.Create(new IdentityRole("sales-user"));
+            ir = rm.Create(new IdentityRole("logistics-admin"));
+            ir = rm.Create(new IdentityRole("logistics-user"));
+            ir = rm.Create(new IdentityRole("finance-admin"));
+            ir = rm.Create(new IdentityRole("finance-user"));
+            ir = rm.Create(new IdentityRole("operations-admin"));
+            ir = rm.Create(new IdentityRole("operations-user"));
             ir = rm.Create(new IdentityRole("management"));
             var um = new UserManager<ApplicationUser>(
                 new UserStore<ApplicationUser>(context));
