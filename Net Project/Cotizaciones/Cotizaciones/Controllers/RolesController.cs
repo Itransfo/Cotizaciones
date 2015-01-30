@@ -13,9 +13,9 @@ namespace Cotizaciones.Controllers
     public class RolesController : Controller
     {
 
+        private ApplicationDbContext context = new ApplicationDbContext();
         public void fillData()
         {
-            var context = new ApplicationDbContext();
             var list = context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
             ViewBag.Roles = list;
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
@@ -28,11 +28,11 @@ namespace Cotizaciones.Controllers
                 foreach (string role in userManager.GetRoles(user.Id))
                     userRoles.Add(user.UserName + " - " + role);
             }
+            ViewBag.UserRoles = userRoles;
             List<string> stringUserNames = users.Select(user => user.UserName).ToList();
             stringUserNames = stringUserNames.OrderBy(s => s).ToList();
             SelectList userNames = new SelectList(stringUserNames);
             ViewBag.Users = userNames;
-            ViewBag.UserRoles = userRoles;
         }
 
         // GET: /Roles/Create
@@ -48,7 +48,6 @@ namespace Cotizaciones.Controllers
         {
             try
             {
-                var context = new ApplicationDbContext();
                 context.Roles.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole()
                 {
                     Name = collection["RoleName"]
@@ -65,14 +64,12 @@ namespace Cotizaciones.Controllers
 
         public ActionResult Index()
         {
-            var context = new ApplicationDbContext();
             var roles = context.Roles.ToList();
             return View(roles);
         }
         
         public ActionResult Delete(string RoleName)
         {
-            var context = new ApplicationDbContext();
             var thisRole = context.Roles.Where(r => r.Name.Equals(RoleName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
             context.Roles.Remove(thisRole);
             context.SaveChanges();
@@ -81,7 +78,6 @@ namespace Cotizaciones.Controllers
 
         public ActionResult Edit(string roleName)
         {
-            var context = new ApplicationDbContext();
             var thisRole = context.Roles.Where(r => r.Name.Equals(roleName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
             return View(thisRole);
         }
@@ -92,7 +88,6 @@ namespace Cotizaciones.Controllers
         {
             try
             {
-                var context = new ApplicationDbContext();
                 context.Entry(role).State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
                 return RedirectToAction("Index");
@@ -114,7 +109,6 @@ namespace Cotizaciones.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult RoleAddToUser(string UserName, string RoleName)
         {
-            var context = new ApplicationDbContext();
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             ApplicationUser user = context.Users.Where(u => u.UserName.Equals(UserName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
             var account = new AccountController();
@@ -128,7 +122,6 @@ namespace Cotizaciones.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteRoleForUser(string UserName, string RoleName)
         {
-            var context = new ApplicationDbContext();
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             var account = new AccountController();
             ApplicationUser user = context.Users.Where(u => u.UserName.Equals(UserName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
