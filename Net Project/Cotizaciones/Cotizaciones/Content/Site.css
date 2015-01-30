@@ -31,7 +31,7 @@ textarea {
   color: #ffffff;
 }
 .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
-  color: #84CDB1;
+  color: #ffffff;
 }
 .navbar-default .navbar-text {
   color: #ffffff;
@@ -47,7 +47,7 @@ textarea {
   background-color: #b5cee4;
 }
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
-  color: #84CDB1;
+  color: #ffffff;
   background-color: #b5cee4;
 }
 .navbar-default .navbar-toggle {
@@ -75,10 +75,10 @@ textarea {
     color: #ffffff;
   }
   .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
-    color: #84CDB1;
+    color: #ffffff;
   }
   .navbar-default .navbar-nav .open .dropdown-menu > .active > a, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
-    color: #84CDB1;
+    color: #ffffff;
     background-color: #b5cee4;
   }
 }

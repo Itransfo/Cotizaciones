@@ -40,7 +40,6 @@ namespace Cotizaciones.Models
         public List<string> Email { get; set; }
 
         [Display(Name = "Tipo de Cliente")]
-        [DataType(DataType.EmailAddress)]
         public string Category { get; set; }
     }
 }
