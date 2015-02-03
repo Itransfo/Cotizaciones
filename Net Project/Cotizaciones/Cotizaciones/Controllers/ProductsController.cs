@@ -10,107 +10,107 @@ using Cotizaciones.Models;
 
 namespace Cotizaciones.Controllers
 {
-    public class StepsController : Controller
+    public class ProductsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Steps
+        // GET: Products
         public ActionResult Index()
         {
-            return View(db.Steps.ToList());
+            return View(db.Products.ToList());
         }
 
-        // GET: Steps/Details/5
+        // GET: Products/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Step step = db.Steps.Find(id);
-            if (step == null)
+            Product product = db.Products.Find(id);
+            if (product == null)
             {
                 return HttpNotFound();
             }
-            return View(step);
+            return View(product);
         }
 
-        // GET: Steps/Create
+        // GET: Products/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Steps/Create
+        // POST: Products/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "StepId,Order,Name,Value,Responsible")] Step step)
+        public ActionResult Create([Bind(Include = "ProductId,ProviderId,Provider,Name,ProductFamily,ProviderPrice,Currency,AdditionalData,ImageURL")] Product product)
         {
             if (ModelState.IsValid)
             {
-                db.Steps.Add(step);
+                db.Products.Add(product);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(step);
+            return View(product);
         }
 
-        // GET: Steps/Edit/5
+        // GET: Products/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Step step = db.Steps.Find(id);
-            if (step == null)
+            Product product = db.Products.Find(id);
+            if (product == null)
             {
                 return HttpNotFound();
             }
-            return View(step);
+            return View(product);
         }
 
-        // POST: Steps/Edit/5
+        // POST: Products/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "StepId,Order,Name,Value,Responsible")] Step step)
+        public ActionResult Edit([Bind(Include = "ProductId,ProviderId,Provider,Name,ProductFamily,ProviderPrice,Currency,AdditionalData,ImageURL")] Product product)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(step).State = EntityState.Modified;
+                db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(step);
+            return View(product);
         }
 
-        // GET: Steps/Delete/5
+        // GET: Products/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Step step = db.Steps.Find(id);
-            if (step == null)
+            Product product = db.Products.Find(id);
+            if (product == null)
             {
                 return HttpNotFound();
             }
-            return View(step);
+            return View(product);
         }
 
-        // POST: Steps/Delete/5
+        // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Step step = db.Steps.Find(id);
-            db.Steps.Remove(step);
+            Product product = db.Products.Find(id);
+            db.Products.Remove(product);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

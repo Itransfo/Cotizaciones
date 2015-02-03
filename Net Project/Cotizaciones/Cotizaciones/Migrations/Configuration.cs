@@ -37,54 +37,63 @@ namespace Cotizaciones.Migrations
                     Order = 1,
                     Name = "Recibir la solicitud",
                     Value = 1,
+                    Responsible = "sales-admin",
                 }
                 , new Cotizaciones.Models.Step
                 {
                     Order = 2,
                     Name = "Contactar al cliente",
                     Value = 2,
+                    Responsible = "sales-admin",
                 }
                 ,new Cotizaciones.Models.Step
                 {
                     Order = 3,
                     Name = "Clasificar al cliente",
                     Value = 3,
+                    Responsible = "sales-admin",
                 }
                 , new Cotizaciones.Models.Step
                 {
                     Order = 4,
                     Name = "Identificar la necesidad del cliente",
                     Value = 4,
+                    Responsible = "sales-admin",
                 }
                 , new Cotizaciones.Models.Step
                 {
                     Order = 5,
                     Name = "Elaborar la propuesta técnica de operaciones",
                     Value = 5,
+                    Responsible = "operations-admin",
                 }
                 , new Cotizaciones.Models.Step
                 {
                     Order = 6,
                     Name = "Elaborar la propuesta de logística",
                     Value = 6,
+                    Responsible = "logistics-admin",
                 }
                 , new Cotizaciones.Models.Step
                 {
                     Order = 7,
                     Name = "Elaborar la propuesta de finanzas",
                     Value = 7,
+                    Responsible = "finance-admin",
                 }
                 , new Cotizaciones.Models.Step
                 {
                     Order = 8,
                     Name = "Elaborar la propuesta comercial",
                     Value = 8,
+                    Responsible = "sales-admin",
                 }
                 , new Cotizaciones.Models.Step
                 {
                     Order = 9,
                     Name = "Entregar la cotización",
                     Value = 9,
+                    Responsible = "sales-admin",
                 }
             );
             context.Clients.AddOrUpdate(p => p.Name,

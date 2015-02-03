@@ -33,5 +33,8 @@ namespace Cotizaciones.Models
         public System.Data.Entity.DbSet<Cotizaciones.Models.Client> Clients { get; set; }
 
         public System.Data.Entity.DbSet<Cotizaciones.Models.Step> Steps { get; set; }
+
+        public System.Data.Entity.DbSet<Cotizaciones.Models.Product> Products { get; set; }
+
     }
 }

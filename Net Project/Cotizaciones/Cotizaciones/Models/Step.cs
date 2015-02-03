@@ -21,5 +21,9 @@ namespace Cotizaciones.Models
         [Required]
         [Display(Name = "Valor / Peso")]
         public int Value { get; set; }
+
+        [Required]
+        [Display(Name = "Responsable")]
+        public string Responsible { get; set; }
     }
 }
