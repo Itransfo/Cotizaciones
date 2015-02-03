@@ -38,6 +38,7 @@
                                     <li>@Html.ActionLink("Manage Users", "ManageUserRoles", "Roles")</li>
                                 </ul>
                             </li>
+                            <li id="indexLink">@Html.ActionLink("Pasos", "Index", "Steps")</li>
                         }
                         if (User.IsInRole("admin") || User.IsInRole("management") || User.IsInRole("sales-admin") ||
                             User.IsInRole("sales-user") || User.IsInRole("operations-admin") || User.IsInRole("operations-user"))

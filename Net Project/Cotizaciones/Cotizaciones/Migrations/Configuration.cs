@@ -31,20 +31,75 @@ namespace Cotizaciones.Migrations
             //    );
             //
             AddUserAndRole(context);
-            //context.Clients.AddOrUpdate(p => p.Name,
-            //new Client
-            //{
-            //    Name = "Juan Perez",
-            //    City = "D.F.",
-            //    Email = "jperez@ejemplo.com",
-            //},
-            // new Client
-            // {
-            //     Name = "José Franco",
-            //     City = "Cuernavaca",
-            //     Email = "jose.franco@outlook.com",
-            // }
-            //);
+            context.Steps.AddOrUpdate(s => s.Name,
+                new Cotizaciones.Models.Step
+                {
+                    Order = 1,
+                    Name = "Recibir la solicitud",
+                    Value = 1,
+                }
+                , new Cotizaciones.Models.Step
+                {
+                    Order = 2,
+                    Name = "Contactar al cliente",
+                    Value = 2,
+                }
+                ,new Cotizaciones.Models.Step
+                {
+                    Order = 3,
+                    Name = "Clasificar al cliente",
+                    Value = 3,
+                }
+                , new Cotizaciones.Models.Step
+                {
+                    Order = 4,
+                    Name = "Identificar la necesidad del cliente",
+                    Value = 4,
+                }
+                , new Cotizaciones.Models.Step
+                {
+                    Order = 5,
+                    Name = "Elaborar la propuesta técnica de operaciones",
+                    Value = 5,
+                }
+                , new Cotizaciones.Models.Step
+                {
+                    Order = 6,
+                    Name = "Elaborar la propuesta de logística",
+                    Value = 6,
+                }
+                , new Cotizaciones.Models.Step
+                {
+                    Order = 7,
+                    Name = "Elaborar la propuesta de finanzas",
+                    Value = 7,
+                }
+                , new Cotizaciones.Models.Step
+                {
+                    Order = 8,
+                    Name = "Elaborar la propuesta comercial",
+                    Value = 8,
+                }
+                , new Cotizaciones.Models.Step
+                {
+                    Order = 9,
+                    Name = "Entregar la cotización",
+                    Value = 9,
+                }
+            );
+            context.Clients.AddOrUpdate(p => p.Name,
+                new Client
+                {
+                    Name = "Cliente",
+                    LastName = "Ejemplo",
+                    Company = "Itransfo",
+                    City = "Cuernavaca",
+                    State = "Morelos",
+                    Country = "Mexico",
+                    Category = "Homero Simpson",
+                }
+            );
+            
         }
 
         bool AddUserAndRole(Cotizaciones.Models.ApplicationDbContext context)

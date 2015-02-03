@@ -162,6 +162,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
+    <Compile Include="Controllers\StepsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -174,11 +175,24 @@
     <Compile Include="Migrations\201501282258485_ExtendedClient.Designer.cs">
       <DependentUpon>201501282258485_ExtendedClient.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201502031448494_Step.cs" />
+    <Compile Include="Migrations\201502031448494_Step.Designer.cs">
+      <DependentUpon>201502031448494_Step.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201502031515543_Step update.cs" />
+    <Compile Include="Migrations\201502031515543_Step update.Designer.cs">
+      <DependentUpon>201502031515543_Step update.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201502031557349_Step fix.cs" />
+    <Compile Include="Migrations\201502031557349_Step fix.Designer.cs">
+      <DependentUpon>201502031557349_Step fix.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Clients.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Step.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -256,6 +270,11 @@
     <Content Include="Views\Roles\Edit.cshtml" />
     <Content Include="Views\Roles\ManageUserRoles.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Steps\Create.cshtml" />
+    <Content Include="Views\Steps\Delete.cshtml" />
+    <Content Include="Views\Steps\Details.cshtml" />
+    <Content Include="Views\Steps\Edit.cshtml" />
+    <Content Include="Views\Steps\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -273,6 +292,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201501282258485_ExtendedClient.resx">
       <DependentUpon>201501282258485_ExtendedClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502031448494_Step.resx">
+      <DependentUpon>201502031448494_Step.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502031515543_Step update.resx">
+      <DependentUpon>201502031515543_Step update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502031557349_Step fix.resx">
+      <DependentUpon>201502031557349_Step fix.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
