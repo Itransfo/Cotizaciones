@@ -82,3 +82,14 @@ textarea {
     background-color: #b5cee4;
   }
 }
+
+a.backButton
+{
+     background: url(/Content/Images/backArrow.png) no-repeat top left ;
+     background-size: 30px 30px;
+     display: block;
+     width: 30px;
+     height: 30px;
+     text-indent: -9999px;
+     float:right;
+}

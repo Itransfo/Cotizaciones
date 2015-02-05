@@ -153,13 +153,13 @@ namespace Cotizaciones.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
                 if (UserManager.FindByEmail(model.Email) != null)
                 {
                     ModelState.AddModelError("Email", "Ya existe un usuario con correo " + model.Email);
                     return View(model);
                 }
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);

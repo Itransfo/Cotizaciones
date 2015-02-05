@@ -10,14 +10,31 @@ using Cotizaciones.Models;
 
 namespace Cotizaciones.Controllers
 {
+    
     public class ClientsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
-        // GET: Clients
-        public ActionResult Index()
+        
+        public ActionResult Index(string sortOrder)
         {
-            return View(db.Clients.ToList());
+            ViewBag.SortOrder = String.IsNullOrEmpty(sortOrder) ? "nameAsc" : sortOrder;
+            var clients = from c in db.Clients select c;
+            switch (sortOrder)
+            {
+                case "nameDesc":
+                    clients = clients.OrderByDescending(c => c.Name);
+                    break;
+                case "categoryDesc":
+                    clients = clients.OrderByDescending(c => c.Category);
+                    break;
+                case "categoryAsc":
+                    clients = clients.OrderBy(c => c.Category);
+                    break;
+                default:
+                    clients = clients.OrderBy(c => c.Name);
+                    break;
+            }
+            return View(clients);
         }
 
         // GET: Clients/Details/5
@@ -35,18 +52,20 @@ namespace Cotizaciones.Controllers
             return View(client);
         }
 
+        [Authorize(Roles = "admin, management, sales-admin")]
         // GET: Clients/Create
         public ActionResult Create()
         {
             return View();
         }
 
+        [Authorize(Roles = "admin, management, sales-admin")]
         // POST: Clients/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ClientId,Name,LastName,Company,City,State,Country,Category")] Client client)
+        public ActionResult Create([Bind(Include = "ClientId,Name,LastName,Company,Address,City,State,Country,Phone,Extension,CellPhone,Email,Category")] Client client)
         {
             if (ModelState.IsValid)
             {
@@ -54,10 +73,10 @@ namespace Cotizaciones.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             return View(client);
         }
 
+        [Authorize(Roles = "admin, management, sales-admin")]
         // GET: Clients/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -73,12 +92,13 @@ namespace Cotizaciones.Controllers
             return View(client);
         }
 
+        [Authorize(Roles = "admin, management, sales-admin")]
         // POST: Clients/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ClientId,Name,LastName,Company,City,State,Country,Category")] Client client)
+        public ActionResult Edit([Bind(Include = "ClientId,Name,LastName,Company,Address,City,State,Country,Phone,Extension,CellPhone,Email,Category")] Client client)
         {
             if (ModelState.IsValid)
             {
@@ -89,6 +109,7 @@ namespace Cotizaciones.Controllers
             return View(client);
         }
 
+        [Authorize(Roles = "admin, management, sales-admin")]
         // GET: Clients/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -104,6 +125,7 @@ namespace Cotizaciones.Controllers
             return View(client);
         }
 
+        [Authorize(Roles = "admin, management, sales-admin")]
         // POST: Clients/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

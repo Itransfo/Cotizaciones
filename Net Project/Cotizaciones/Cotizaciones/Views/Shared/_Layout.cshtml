@@ -40,11 +40,7 @@
                             </li>
                             <li id="indexLink">@Html.ActionLink("Pasos", "Index", "Steps")</li>
                         }
-                        if (User.IsInRole("admin") || User.IsInRole("management") || User.IsInRole("sales-admin") ||
-                            User.IsInRole("sales-user") || User.IsInRole("operations-admin") || User.IsInRole("operations-user"))
-                        {
-                            <li id="indexLink">@Html.ActionLink("Clientes", "Index", "Clients")</li>
-                        }
+                        <li id="indexLink">@Html.ActionLink("Clientes", "Index", "Clients")</li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")

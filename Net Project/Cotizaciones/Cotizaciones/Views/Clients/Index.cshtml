@@ -1,68 +1,83 @@
 ﻿@model IEnumerable<Cotizaciones.Models.Client>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Clientes";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<div class="row">
+    <div class="col-md-10">
+        <h2>Clientes</h2>
+    </div>
+    <div class="col-md-2" style="float:right; margin-bottom: 5px; margin-top:15px;">
+        @if (User.IsInRole("admin") || User.IsInRole("management") || User.IsInRole("sales-admin"))
+        {
+            @Html.ActionLink("Nuevo Cliente", "Create", null, new { @class = "btn btn-success" })
+        }
+    </div>
+</div>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastName)
+            @if (("nameDesc").Equals(ViewBag.SortOrder))
+            {
+                @Html.ActionLink("▼ Nombre", "Index", new { sortOrder = "nameAsc" })
+            }
+            else if (("nameAsc").Equals(ViewBag.SortOrder))
+            {
+                @Html.ActionLink("▲ Nombre", "Index", new { sortOrder = "nameDesc" })
+            }
+            else
+            {
+                @Html.ActionLink("Nombre", "Index", new { sortOrder = "nameAsc" })
+            }
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Company)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.City)
+            @Html.DisplayNameFor(model => model.Email)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.State)
+            @if (("categoryDesc").Equals(ViewBag.SortOrder))
+            {
+                @Html.ActionLink("▼ Tipo de Cliente", "Index", new { sortOrder = "categoryAsc" })
+            }
+            else if (("categoryAsc").Equals(ViewBag.SortOrder))
+            {
+                @Html.ActionLink("▲ Tipo de Cliente", "Index", new { sortOrder = "categoryDesc" })
+            }
+            else
+            {
+                @Html.ActionLink("Tipo de Cliente", "Index", new { sortOrder = "categoryAsc" })
+            }
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Country)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Category)
-        </th>
+        @if (User.IsInRole("admin") || User.IsInRole("management") || User.IsInRole("sales-admin"))
+        {
         <th></th>
+        }
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
+            @Html.ActionLink(item.getFullName(), "Details", new { id = item.ClientId })
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Company)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.City)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.State)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Country)
+            @Html.DisplayFor(modelItem => item.Email)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Category)
         </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ClientId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ClientId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ClientId })
-        </td>
+        @if (User.IsInRole("admin") || User.IsInRole("management") || User.IsInRole("sales-admin"))
+        {
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id=item.ClientId }) |
+                @Html.ActionLink("Borrar", "Delete", new { id = item.ClientId }, new { @style = "color:red;" } )
+            </td>
+        }
     </tr>
 }
 

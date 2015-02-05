@@ -9,18 +9,21 @@ namespace Cotizaciones.Models
     public class Client
     {
         public int ClientId { get; set; }
-        
-        [Required]
+
+        [Required(ErrorMessage = "Este campo es requerido")]
         [Display(Name = "Nombre(s)")]
         public string Name { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Este campo es requerido")]
         [Display(Name = "Apellidos")]
         public string LastName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Este campo es requerido")]
         [Display(Name = "Empresa")]
         public string Company { get; set; }
+
+        [Display(Name = "Dirección")]
+        public string Address { get; set; }
 
         [Display(Name = "Ciudad / Municipio")]
         public string City { get; set; }
@@ -31,15 +34,27 @@ namespace Cotizaciones.Models
         [Display(Name = "País")]
         public string Country { get; set; }
         
-        [Display(Name = "Teléfonos")]
+        [Display(Name = "Teléfono")]
         [DataType(DataType.PhoneNumber)]
-        public List<string> Phone { get; set; }
+        public string Phone { get; set; }
 
-        [Display(Name = "Email(s)")]
+        [Display(Name = "Extensión")]
+        public Nullable<int> Extension { get; set; }
+
+        [Display(Name = "Celular")]
+        [DataType(DataType.PhoneNumber)]
+        public string CellPhone { get; set; }
+
+        [Display(Name = "Email")]
         [DataType(DataType.EmailAddress)]
-        public List<string> Email { get; set; }
+        public string Email { get; set; }
 
         [Display(Name = "Tipo de Cliente")]
         public string Category { get; set; }
+
+        public string getFullName()
+        {
+            return string.Format("{0} {1}",Name,LastName);
+        }
     }
 }
