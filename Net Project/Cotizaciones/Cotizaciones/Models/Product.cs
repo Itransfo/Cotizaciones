@@ -13,20 +13,19 @@ namespace Cotizaciones.Models
         [Display(Name = "ID del Proveedor")]
         public string ProviderId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Este campo es requerido")]
         [Display(Name = "Proveedor")]
         public string Provider { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Este campo es requerido")]
         [Display(Name = "Nombre")]
         public string Name { get; set; }
 
         [Display(Name = "Familia de producto")]
         public string ProductFamily { get; set; }
 
-        [DataType(DataType.Currency)]
         [Display(Name = "Precio del proveedor")]
-        public string ProviderPrice { get; set; }
+        public Nullable<decimal> ProviderPrice { get; set; }
 
         [Display(Name = "Moneda del precio")]
         public string Currency { get; set; }

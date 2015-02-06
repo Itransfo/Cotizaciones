@@ -158,6 +158,7 @@ namespace Cotizaciones.Controllers
                     ModelState.AddModelError("Email", "Ya existe un usuario con correo " + model.Email);
                     return View(model);
                 }
+                //string[] userName = model.Email.Split('@');
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -187,7 +188,7 @@ namespace Cotizaciones.Controllers
                     {
                         TempData["Error"] = ex.ToString();
                     }
-                    await UserManager.AddToRoleAsync(user.Id, "user");
+                    //await UserManager.AddToRoleAsync(user.Id, "user");
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
@@ -507,4 +508,5 @@ namespace Cotizaciones.Controllers
         }
         #endregion
     }
+
 }

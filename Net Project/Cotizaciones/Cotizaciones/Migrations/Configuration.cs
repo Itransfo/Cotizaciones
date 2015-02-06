@@ -118,6 +118,7 @@ namespace Cotizaciones.Migrations
                 (new RoleStore<IdentityRole>(context));
             ir = rm.Create(new IdentityRole("admin"));
             ir = rm.Create(new IdentityRole("user"));
+            ir = rm.Create(new IdentityRole("authorized-user"));
             ir = rm.Create(new IdentityRole("sales-admin"));
             ir = rm.Create(new IdentityRole("sales-user"));
             ir = rm.Create(new IdentityRole("logistics-admin"));
@@ -127,6 +128,7 @@ namespace Cotizaciones.Migrations
             ir = rm.Create(new IdentityRole("operations-admin"));
             ir = rm.Create(new IdentityRole("operations-user"));
             ir = rm.Create(new IdentityRole("management"));
+
             var um = new UserManager<ApplicationUser>(
                 new UserStore<ApplicationUser>(context));
             var user = new ApplicationUser()

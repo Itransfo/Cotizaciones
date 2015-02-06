@@ -10,7 +10,7 @@ using Cotizaciones.Models;
 
 namespace Cotizaciones.Controllers
 {
-    
+    [Authorize(Roles = "authorized-user")]
     public class ClientsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

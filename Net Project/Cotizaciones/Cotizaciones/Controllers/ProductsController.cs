@@ -10,14 +10,38 @@ using Cotizaciones.Models;
 
 namespace Cotizaciones.Controllers
 {
+    [Authorize(Roles = "authorized-user")]
     public class ProductsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Products
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder)
         {
-            return View(db.Products.ToList());
+            ViewBag.SortOrder = String.IsNullOrEmpty(sortOrder) ? "nameAsc" : sortOrder;
+            var products = from p in db.Products select p;
+            switch (sortOrder)
+            {
+                case "nameDesc":
+                    products = products.OrderByDescending(p => p.Name);
+                    break;
+                case "providerDesc":
+                    products = products.OrderByDescending(p => p.Provider);
+                    break;
+                case "providerAsc":
+                    products = products.OrderBy(p => p.Provider);
+                    break;
+                case "familyDesc":
+                    products = products.OrderByDescending(p => p.ProductFamily);
+                    break;
+                case "familyAsc":
+                    products = products.OrderBy(p => p.ProductFamily);
+                    break;
+                default:
+                    products = products.OrderBy(p => p.Name);
+                    break;
+            }
+            return View(products);
         }
 
         // GET: Products/Details/5
@@ -36,6 +60,7 @@ namespace Cotizaciones.Controllers
         }
 
         // GET: Products/Create
+        [Authorize(Roles = "admin, management, sales-admin, operations-admin")]
         public ActionResult Create()
         {
             return View();
@@ -46,6 +71,7 @@ namespace Cotizaciones.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin, management, sales-admin, operations-admin")]
         public ActionResult Create([Bind(Include = "ProductId,ProviderId,Provider,Name,ProductFamily,ProviderPrice,Currency,AdditionalData,ImageURL")] Product product)
         {
             if (ModelState.IsValid)
@@ -59,6 +85,7 @@ namespace Cotizaciones.Controllers
         }
 
         // GET: Products/Edit/5
+        [Authorize(Roles = "admin, management, sales-admin, operations-admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -78,6 +105,7 @@ namespace Cotizaciones.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin, management, sales-admin, operations-admin")]
         public ActionResult Edit([Bind(Include = "ProductId,ProviderId,Provider,Name,ProductFamily,ProviderPrice,Currency,AdditionalData,ImageURL")] Product product)
         {
             if (ModelState.IsValid)
@@ -86,10 +114,16 @@ namespace Cotizaciones.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            if (ModelState["ProviderPrice"].Errors.Count > 0)
+            {
+                ModelState["ProviderPrice"].Errors.Clear();
+                ModelState["ProviderPrice"].Errors.Add("El precio no es válido");
+            }
             return View(product);
         }
 
         // GET: Products/Delete/5
+        [Authorize(Roles = "admin, management, sales-admin, operations-admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -105,6 +139,7 @@ namespace Cotizaciones.Controllers
         }
 
         // POST: Products/Delete/5
+        [Authorize(Roles = "admin, management, sales-admin, operations-admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
