@@ -1,29 +1,13 @@
 ﻿@model Cotizaciones.Models.Product
 
 @{
-    ViewBag.Title = Model.Name;
+    ViewBag.Title = "Details";
 }
 
-<div class="row">
-    <div class="col-md-1" style="margin-top:20px;">
-        @Html.ActionLink("Index", "Index", null, new { @class = "backButton" })
-    </div>
-    <div class="col-md-8">
-        <h2>@Model.Name</h2>
-    </div>
-    <div class="col-md-2" style="float:right; margin-bottom: 5px; margin-top:15px;">
-        @if (User.IsInRole("admin") || User.IsInRole("management") || User.IsInRole("sales-admin") || User.IsInRole("operations-admin"))
-        {
-            @Html.ActionLink("Editar", "Edit", new { id = Model.ProductId }, new { @class = "btn btn-primary" })
-        }
-        @if (User.IsInRole("admin") || User.IsInRole("management") || User.IsInRole("sales-admin") || User.IsInRole("operations-admin"))
-        {
-            @Html.ActionLink("Borrar", "Delete", new { id = Model.ProviderId }, new { @class = "btn btn-danger" })
-        }
-    </div>
-</div>
+<h2>Details</h2>
 
 <div>
+    <h4>Product</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -82,5 +66,17 @@
             @Html.DisplayFor(model => model.AdditionalData)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageURL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImageURL)
+        </dd>
+
     </dl>
 </div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ProductId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

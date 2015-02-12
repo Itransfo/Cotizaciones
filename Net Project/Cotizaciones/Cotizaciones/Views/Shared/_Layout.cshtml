@@ -23,27 +23,24 @@
                 <ul class="nav navbar-nav">
                     @if(User.Identity.IsAuthenticated)
                     {
+                        <li id="indexLink">@Html.ActionLink("Inicio", "Index", "Home")</li>
                         if (User.IsInRole("admin"))
                         {
+                            <li id="indexLink">@Html.ActionLink("Users", "Index", "Users")</li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                    Data management
+                                    Roles
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li>@Html.ActionLink("Users", "Index", "Users")</li>
-                                    <li>@Html.ActionLink("Roles", "Index", "Roles")</li>
+                                    <li>@Html.ActionLink("Index", "Index", "Roles")</li>
                                     <li>@Html.ActionLink("Create Role", "Create", "Roles")</li>
                                     <li>@Html.ActionLink("Manage Users", "ManageUserRoles", "Roles")</li>
-                                    <li>@Html.ActionLink("Pasos", "Index", "Steps")</li>
                                 </ul>
                             </li>
+                            <li id="indexLink">@Html.ActionLink("Pasos", "Index", "Steps")</li>
                         }
-                        if (User.IsInRole("authorized-user"))
-                        {
-                            <li id="indexLink">@Html.ActionLink("Clientes", "Index", "Clients")</li>
-                            <li id="indexLink">@Html.ActionLink("Productos", "Index", "Products")</li>
-                        }
+                        <li id="indexLink">@Html.ActionLink("Clientes", "Index", "Clients")</li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")

@@ -15,7 +15,6 @@
         }
     </div>
 </div>
-
 <table class="table">
     <tr>
         <th>
@@ -76,7 +75,7 @@
         {
             <td>
                 @Html.ActionLink("Editar", "Edit", new { id=item.ClientId }) |
-                @Html.ActionLink("Eliminar", "Delete", new { id = item.ClientId }, new { @style = "color:red;" } )
+                @Html.ActionLink("Borrar", "Delete", new { id = item.ClientId }, new { @style = "color:red;" } )
             </td>
         }
     </tr>

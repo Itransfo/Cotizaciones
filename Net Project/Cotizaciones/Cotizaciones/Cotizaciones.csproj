@@ -204,6 +204,7 @@
     <Compile Include="Migrations\201502051828212_Error fix.Designer.cs">
       <DependentUpon>201502051828212_Error fix.cs</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="Migrations\201502062210099_Product prices.cs" />
     <Compile Include="Migrations\201502062210099_Product prices.Designer.cs">
       <DependentUpon>201502062210099_Product prices.cs</DependentUpon>
@@ -236,6 +237,8 @@
     <Compile Include="Migrations\201502091848115_Step Stakeholders.Designer.cs">
       <DependentUpon>201502091848115_Step Stakeholders.cs</DependentUpon>
     </Compile>
+=======
+>>>>>>> parent of 8901e1b... Products and role management
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Clients.cs" />
@@ -375,6 +378,7 @@
     <EmbeddedResource Include="Migrations\201502051828212_Error fix.resx">
       <DependentUpon>201502051828212_Error fix.cs</DependentUpon>
     </EmbeddedResource>
+<<<<<<< HEAD
     <EmbeddedResource Include="Migrations\201502062210099_Product prices.resx">
       <DependentUpon>201502062210099_Product prices.cs</DependentUpon>
     </EmbeddedResource>
@@ -399,6 +403,8 @@
     <EmbeddedResource Include="Migrations\201502091848115_Step Stakeholders.resx">
       <DependentUpon>201502091848115_Step Stakeholders.cs</DependentUpon>
     </EmbeddedResource>
+=======
+>>>>>>> parent of 8901e1b... Products and role management
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
