@@ -42,7 +42,34 @@
             @Html.DisplayFor(model => model.Responsible)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Tolerance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tolerance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Reminder)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reminder)
+        </dd>
+
     </dl>
+</div>
+<div>
+    <h4>Stakeholders</h4>
+    <hr />
+    <ul>
+        @foreach (var item in Model.StepStakeholders)
+        {
+            <li>@item.Stakeholder</li>
+        }
+    </ul>
+
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.StepId }) |

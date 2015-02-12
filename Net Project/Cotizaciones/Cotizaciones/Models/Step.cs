@@ -25,5 +25,15 @@ namespace Cotizaciones.Models
         [Required]
         [Display(Name = "Responsable")]
         public string Responsible { get; set; }
+
+        [Display(Name = "Tolerancia(hrs)")]
+        public int Tolerance { get; set; }
+
+        [Display(Name = "Recordatorio(hrs)")]
+        public int Reminder { get; set; }
+
+
+        public virtual ICollection<StepStakeholder> StepStakeholders { get; set; }
+
     }
 }

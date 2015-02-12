@@ -95,6 +95,13 @@ namespace Cotizaciones.Migrations
                     Value = 9,
                     Responsible = "sales-admin",
                 }
+                , new Cotizaciones.Models.Step
+                {
+                    Order = 99,
+                    Name = "Standby",
+                    Value = 0,
+                    Responsible = "",
+                }
             );
             context.Clients.AddOrUpdate(p => p.Name,
                 new Client
@@ -139,6 +146,7 @@ namespace Cotizaciones.Migrations
             if (ir.Succeeded == false)
                 return ir.Succeeded;
             ir = um.AddToRole(user.Id, "admin");
+            ir = um.AddToRole(user.Id, "authorized-user");
             return ir.Succeeded;
         }
     }

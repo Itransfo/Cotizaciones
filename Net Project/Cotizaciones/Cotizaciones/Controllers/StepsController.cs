@@ -46,7 +46,7 @@ namespace Cotizaciones.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "StepId,Order,Name,Value,Responsible")] Step step)
+        public ActionResult Create([Bind(Include = "StepId,Order,Name,Value,Responsible,Tolerance,Reminder")] Step step)
         {
             if (ModelState.IsValid)
             {
@@ -70,6 +70,8 @@ namespace Cotizaciones.Controllers
             {
                 return HttpNotFound();
             }
+            var roles = db.Roles.ToList().Select(role => role.Name).ToList();
+            ViewBag.Roles = roles;
             return View(step);
         }
 
@@ -78,7 +80,7 @@ namespace Cotizaciones.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "StepId,Order,Name,Value,Responsible")] Step step)
+        public ActionResult Edit([Bind(Include = "StepId,Order,Name,Value,Responsible,Tolerance,Reminder")] Step step)
         {
             if (ModelState.IsValid)
             {
@@ -110,6 +112,7 @@ namespace Cotizaciones.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Step step = db.Steps.Find(id);
+            step.StepStakeholders.Clear();
             db.Steps.Remove(step);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -122,6 +125,30 @@ namespace Cotizaciones.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        [HttpPost]
+        public ActionResult AddStakeholder (int stepId, string stakeholder)
+        {
+            Step step = db.Steps.Find(stepId);
+            StepStakeholder stepStakeHolder = new StepStakeholder();
+            stepStakeHolder.Stakeholder = stakeholder;
+            step.StepStakeholders.Add(stepStakeHolder);
+            db.SaveChanges();
+            var roles = db.Roles.ToList().Select(role => role.Name).ToList();
+            ViewBag.Roles = roles;
+            return View("Edit", step);
+        }
+
+        public ActionResult DeleteStakeholder(int stepId, string stakeholder)
+        {
+            Step step = db.Steps.Find(stepId);
+            StepStakeholder stepStakeholder = step.StepStakeholders.First(s => s.Stakeholder == stakeholder);
+            step.StepStakeholders.Remove(stepStakeholder);
+            db.SaveChanges();
+            var roles = db.Roles.ToList().Select(role => role.Name).ToList();
+            ViewBag.Roles = roles;
+            return View("Edit", step);
         }
     }
 }

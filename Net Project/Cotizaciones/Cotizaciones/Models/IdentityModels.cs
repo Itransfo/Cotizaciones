@@ -36,5 +36,6 @@ namespace Cotizaciones.Models
 
         public System.Data.Entity.DbSet<Cotizaciones.Models.Product> Products { get; set; }
 
+
     }
 }
