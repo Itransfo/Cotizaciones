@@ -14,11 +14,11 @@ namespace Cotizaciones.Controllers
     {
 
         private ApplicationDbContext context = new ApplicationDbContext();
-        public void fillData()
+
+        public void fillData(UserManager<ApplicationUser> userManager)
         {
             var list = context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
             ViewBag.Roles = list;
-            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             List<string> userRoles = new List<string>();
             List<ApplicationUser> users = context.Users.ToList();
             foreach (ApplicationUser user in users)
@@ -101,7 +101,7 @@ namespace Cotizaciones.Controllers
         public ActionResult ManageUserRoles()
         {
             // prepopulat roles for the view dropdown
-            fillData();
+            fillData(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context)));
             return View();
         }
 
@@ -110,12 +110,14 @@ namespace Cotizaciones.Controllers
         public ActionResult RoleAddToUser(string UserName, string RoleName)
         {
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            var userValidator = new UserValidator<ApplicationUser>(userManager);
+            userValidator.AllowOnlyAlphanumericUserNames = false;
+            userManager.UserValidator = userValidator;
             ApplicationUser user = context.Users.Where(u => u.UserName.Equals(UserName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
             var account = new AccountController();
-            userManager.AddToRole(user.Id, RoleName);
+            var result = userManager.AddToRole(user.Id, RoleName);
             ViewBag.ResultMessage = "Role created successfully !";
-            fillData();
-            return View("ManageUserRoles");
+            return RedirectToAction("ManageUserRoles");
         }
 
         [HttpPost]
@@ -123,19 +125,21 @@ namespace Cotizaciones.Controllers
         public ActionResult DeleteRoleForUser(string UserName, string RoleName)
         {
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            var userValidator = new UserValidator<ApplicationUser>(userManager);
+            userValidator.AllowOnlyAlphanumericUserNames = false;
+            userManager.UserValidator = userValidator;
             var account = new AccountController();
             ApplicationUser user = context.Users.Where(u => u.UserName.Equals(UserName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
             try
             {
-                userManager.RemoveFromRole(user.Id, RoleName);
+                var result = userManager.RemoveFromRole(user.Id, RoleName);
                 ViewBag.ResultMessage = "Role removed from this user successfully !";
             }
             catch
             {
                 ViewBag.ResultMessage = "This user doesn't belong to selected role.";
             }
-            fillData();
-            return View("ManageUserRoles");
+            return RedirectToAction("ManageUserRoles");
         }
     }
 }

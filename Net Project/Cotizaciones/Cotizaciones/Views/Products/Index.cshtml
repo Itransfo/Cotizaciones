@@ -1,74 +1,89 @@
 ﻿@model IEnumerable<Cotizaciones.Models.Product>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Productos";
 }
 
-<h2>Index</h2>
+<div class="row">
+    <div class="col-md-10">
+        <h2>Productos</h2>
+    </div>
+    <div class="col-md-2" style="float:right; margin-bottom: 5px; margin-top:15px;">
+        @if (User.IsInRole("admin") || User.IsInRole("management") || User.IsInRole("sales-admin") || User.IsInRole("operations-admin"))
+        {
+            @Html.ActionLink("Nuevo Producto", "Create", null, new { @class = "btn btn-success" })
+        }
+    </div>
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ProviderId)
+            @if (("nameDesc").Equals(ViewBag.SortOrder))
+            {
+                @Html.ActionLink("▼ Nombre", "Index", new { sortOrder = "nameAsc" })
+            }
+            else if (("nameAsc").Equals(ViewBag.SortOrder))
+            {
+                @Html.ActionLink("▲ Nombre", "Index", new { sortOrder = "nameDesc" })
+            }
+            else
+            {
+                @Html.ActionLink("Nombre", "Index", new { sortOrder = "nameAsc" })
+            }
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Provider)
+            @if (("providerDesc").Equals(ViewBag.SortOrder))
+            {
+                @Html.ActionLink("▼ Proveedor", "Index", new { sortOrder = "providerAsc" })
+            }
+            else if (("providerAsc").Equals(ViewBag.SortOrder))
+            {
+                @Html.ActionLink("▲ Proveedor", "Index", new { sortOrder = "providerDesc" })
+            }
+            else
+            {
+                @Html.ActionLink("Proveedor", "Index", new { sortOrder = "providerAsc" })
+            }
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @if (("familyDesc").Equals(ViewBag.SortOrder))
+            {
+                @Html.ActionLink("▼ Familia de Producto", "Index", new { sortOrder = "familyAsc" })
+            }
+            else if (("familyAsc").Equals(ViewBag.SortOrder))
+            {
+                @Html.ActionLink("▲ Familia de Producto", "Index", new { sortOrder = "familyDesc" })
+            }
+            else
+            {
+                @Html.ActionLink("Familia de Producto", "Index", new { sortOrder = "familyAsc" })
+            }
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductFamily)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProviderPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Currency)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AdditionalData)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ImageURL)
-        </th>
-        <th></th>
+        @if (User.IsInRole("admin") || User.IsInRole("management") || User.IsInRole("sales-admin") || User.IsInRole("operations-admin"))
+        {
+            <th></th>
+        }
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.ProviderId)
+            @Html.ActionLink(item.Name, "Details", new { id = item.ProductId })
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Provider)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.ProductFamily)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProviderPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Currency)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AdditionalData)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ImageURL)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ProductId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ProductId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ProductId })
-        </td>
+        @if (User.IsInRole("admin") || User.IsInRole("management") || User.IsInRole("sales-admin") || User.IsInRole("operations-admin"))
+        {
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id=item.ProductId }) |
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.ProductId }, new { @style = "color:red;" })
+            </td>
+        }
     </tr>
 }
 

@@ -30,91 +30,112 @@ namespace Cotizaciones.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
-            AddUserAndRole(context);
-            context.Steps.AddOrUpdate(s => s.Name,
-                new Cotizaciones.Models.Step
+            try
+            {
+                AddUserAndRole(context);
+                context.Steps.AddOrUpdate(s => s.Name,
+                    new Cotizaciones.Models.Step
+                    {
+                        Order = 1,
+                        Name = "Recibir la solicitud",
+                        Value = 1,
+                        Responsible = "sales-admin",
+                    }
+                    , new Cotizaciones.Models.Step
+                    {
+                        Order = 2,
+                        Name = "Contactar al cliente",
+                        Value = 2,
+                        Responsible = "sales-admin",
+                    }
+                    , new Cotizaciones.Models.Step
+                    {
+                        Order = 3,
+                        Name = "Clasificar al cliente",
+                        Value = 3,
+                        Responsible = "sales-admin",
+                    }
+                    , new Cotizaciones.Models.Step
+                    {
+                        Order = 4,
+                        Name = "Identificar la necesidad del cliente",
+                        Value = 4,
+                        Responsible = "sales-admin",
+                    }
+                    , new Cotizaciones.Models.Step
+                    {
+                        Order = 5,
+                        Name = "Elaborar la propuesta técnica de operaciones",
+                        Value = 5,
+                        Responsible = "operations-admin",
+                    }
+                    , new Cotizaciones.Models.Step
+                    {
+                        Order = 6,
+                        Name = "Elaborar la propuesta de logística",
+                        Value = 6,
+                        Responsible = "logistics-admin",
+                    }
+                    , new Cotizaciones.Models.Step
+                    {
+                        Order = 7,
+                        Name = "Elaborar la propuesta de finanzas",
+                        Value = 7,
+                        Responsible = "finance-admin",
+                    }
+                    , new Cotizaciones.Models.Step
+                    {
+                        Order = 8,
+                        Name = "Elaborar la propuesta comercial",
+                        Value = 8,
+                        Responsible = "sales-admin",
+                    }
+                    , new Cotizaciones.Models.Step
+                    {
+                        Order = 9,
+                        Name = "Entregar la cotización",
+                        Value = 9,
+                        Responsible = "sales-admin",
+                    }
+                    , new Cotizaciones.Models.Step
+                    {
+                        Order = 99,
+                        Name = "Standby",
+                        Value = 0,
+                        Responsible = "none",
+                    }
+                );
+                context.Clients.AddOrUpdate(p => p.Name,
+                    new Client
+                    {
+                        Name = "Cliente",
+                        LastName = "Ejemplo",
+                        Company = "Itransfo",
+                        City = "Cuernavaca",
+                        State = "Morelos",
+                        Country = "Mexico",
+                        Category = "Homero Simpson",
+                    }
+                );
+                context.SaveChanges();
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+            {
+                Exception raise = dbEx;
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
                 {
-                    Order = 1,
-                    Name = "Recibir la solicitud",
-                    Value = 1,
-                    Responsible = "sales-admin",
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        string message = string.Format("{0}:{1}",
+                            validationErrors.Entry.Entity.ToString(),
+                            validationError.ErrorMessage);
+                        // raise a new exception nesting  
+                        // the current instance as InnerException  
+                        raise = new InvalidOperationException(message, raise);
+                    }
                 }
-                , new Cotizaciones.Models.Step
-                {
-                    Order = 2,
-                    Name = "Contactar al cliente",
-                    Value = 2,
-                    Responsible = "sales-admin",
-                }
-                ,new Cotizaciones.Models.Step
-                {
-                    Order = 3,
-                    Name = "Clasificar al cliente",
-                    Value = 3,
-                    Responsible = "sales-admin",
-                }
-                , new Cotizaciones.Models.Step
-                {
-                    Order = 4,
-                    Name = "Identificar la necesidad del cliente",
-                    Value = 4,
-                    Responsible = "sales-admin",
-                }
-                , new Cotizaciones.Models.Step
-                {
-                    Order = 5,
-                    Name = "Elaborar la propuesta técnica de operaciones",
-                    Value = 5,
-                    Responsible = "operations-admin",
-                }
-                , new Cotizaciones.Models.Step
-                {
-                    Order = 6,
-                    Name = "Elaborar la propuesta de logística",
-                    Value = 6,
-                    Responsible = "logistics-admin",
-                }
-                , new Cotizaciones.Models.Step
-                {
-                    Order = 7,
-                    Name = "Elaborar la propuesta de finanzas",
-                    Value = 7,
-                    Responsible = "finance-admin",
-                }
-                , new Cotizaciones.Models.Step
-                {
-                    Order = 8,
-                    Name = "Elaborar la propuesta comercial",
-                    Value = 8,
-                    Responsible = "sales-admin",
-                }
-                , new Cotizaciones.Models.Step
-                {
-                    Order = 9,
-                    Name = "Entregar la cotización",
-                    Value = 9,
-                    Responsible = "sales-admin",
-                }
-                , new Cotizaciones.Models.Step
-                {
-                    Order = 99,
-                    Name = "Standby",
-                    Value = 0,
-                    Responsible = "",
-                }
-            );
-            context.Clients.AddOrUpdate(p => p.Name,
-                new Client
-                {
-                    Name = "Cliente",
-                    LastName = "Ejemplo",
-                    Company = "Itransfo",
-                    City = "Cuernavaca",
-                    State = "Morelos",
-                    Country = "Mexico",
-                    Category = "Homero Simpson",
-                }
-            );
+                throw raise;
+            }  
             
         }
 
@@ -125,6 +146,7 @@ namespace Cotizaciones.Migrations
                 (new RoleStore<IdentityRole>(context));
             ir = rm.Create(new IdentityRole("admin"));
             ir = rm.Create(new IdentityRole("user"));
+            ir = rm.Create(new IdentityRole("authorized-user"));
             ir = rm.Create(new IdentityRole("sales-admin"));
             ir = rm.Create(new IdentityRole("sales-user"));
             ir = rm.Create(new IdentityRole("logistics-admin"));
@@ -134,6 +156,7 @@ namespace Cotizaciones.Migrations
             ir = rm.Create(new IdentityRole("operations-admin"));
             ir = rm.Create(new IdentityRole("operations-user"));
             ir = rm.Create(new IdentityRole("management"));
+
             var um = new UserManager<ApplicationUser>(
                 new UserStore<ApplicationUser>(context));
             var user = new ApplicationUser()
