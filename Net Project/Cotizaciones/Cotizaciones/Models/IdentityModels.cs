@@ -36,6 +36,10 @@ namespace Cotizaciones.Models
 
         public System.Data.Entity.DbSet<Cotizaciones.Models.Product> Products { get; set; }
 
+        public System.Data.Entity.DbSet<Cotizaciones.Models.Order> Orders { get; set; }
+
+        public System.Data.Entity.DbSet<Cotizaciones.Models.OrderProduct> OrderProducts { get; set; }
+
 
     }
 }

@@ -1,0 +1,99 @@
+﻿@model Cotizaciones.Models.Order
+
+@{
+    ViewBag.Title = string.Format("Orden {0}",Model.Identifier);
+}
+
+<div class="row">
+    <div class="col-md-1" style="margin-top:20px;">
+        @Html.ActionLink("Index", "Index", null, new { @class = "backButton" })
+    </div>
+    <div class="col-md-8">
+        <h2>@string.Format("Orden {0}",Model.Identifier)</h2>
+    </div>
+    <div class="col-md-2" style="float:right; margin-bottom: 5px; margin-top:15px;">
+        @if (User.IsInRole("admin") || User.IsInRole("management") || User.IsInRole("sales-admin"))
+        {
+            @Html.ActionLink("Editar", "Edit", new { id = Model.OrderId }, new { @class = "btn btn-primary" })
+        }
+        @if (User.IsInRole("admin") || User.IsInRole("management") || User.IsInRole("sales-admin"))
+        {
+            @Html.ActionLink("Borrar", "Delete", new { id = Model.OrderId }, new { @class = "btn btn-danger" })
+        }
+    </div>
+</div>
+
+<div class="row">
+    <hr />
+    <div class="col-md-5">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Identifier)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Identifier)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Preproject)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Preproject)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DateCreated)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.DateCreated)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Client)
+            </dt>
+            <dd>
+                @if (Model.Client != null)
+                {
+                    @Html.ActionLink(Model.Client.getFullName(), "Details", "Clients", new { @id = Model.Client.ClientId }, null);
+                }
+                else
+                {
+                    @Html.Raw("No hay cliente definido")
+                }
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.RequestDescription)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.RequestDescription)
+            </dd>
+
+            <dt>
+                Actualmente en el paso
+            </dt>
+            <dd>
+                @string.Format("{0} - {1}",Model.Step.Order,Model.Step.Name)
+            </dd>
+
+        </dl>
+    </div>
+    <div class="col-md-5">
+        <h4>Productos</h4>
+        <table class="table-condensed">
+            <tr>
+                <th>Fabricante</th>
+                <th>Producto</th>
+                <th>Cantidad</th>
+            </tr>
+            @foreach(Cotizaciones.Models.OrderProduct item in ViewBag.OrderProducts)
+            {
+            <tr>
+                    <td>@item.Product.Provider</td>
+                    <td>@Html.ActionLink(item.Product.Name, "Details", "Products", new { @id = item.Product.ProductId }, null)</td>
+                    <td>@item.Quantity</td>   
+            </tr>
+            }
+        </table>
+    </div>
+</div>

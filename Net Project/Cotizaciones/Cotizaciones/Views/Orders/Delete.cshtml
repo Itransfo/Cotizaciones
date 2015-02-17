@@ -1,0 +1,53 @@
+﻿@model Cotizaciones.Models.Order
+
+@{
+    ViewBag.Title = "Eliminar";
+}
+
+<div class="row">
+    <div class="col-md-1" style="margin-top:20px;">
+        @Html.ActionLink("Index", "Index", null, new { @class = "backButton" })
+    </div>
+    <div class="col-md-8">
+        <h2>Eliminar @string.Format("Orden {0}",Model.Identifier)</h2>
+    </div>
+</div>
+
+<h3>¿Está seguro que desea eliminar esta ordén?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Identifier)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Identifier)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Preproject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Preproject)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RequestDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RequestDescription)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-danger" />
+        </div>
+    }
+</div>

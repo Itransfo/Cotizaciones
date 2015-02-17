@@ -1,0 +1,90 @@
+﻿@model IEnumerable<Cotizaciones.Models.Order>
+
+@{
+    ViewBag.Title = "Órdenes";
+}
+
+<div class="row">
+    <div class="col-md-10">
+        <h2>Orden</h2>
+    </div>
+    <div class="col-md-2" style="float:right; margin-bottom: 5px; margin-top:15px;">
+        @if (User.IsInRole("admin") || User.IsInRole("management") || User.IsInRole("sales-admin"))
+        {
+            @Html.ActionLink("Nueva Orden", "Create", null, new { @class = "btn btn-success" })
+        }
+    </div>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @if (("identifierDesc").Equals(ViewBag.SortOrder))
+            {
+                @Html.ActionLink("▼ Identificador", "Index", new { sortOrder = "identifierAsc" })
+            }
+            else if (("identifierAsc").Equals(ViewBag.SortOrder))
+            {
+                @Html.ActionLink("▲ Identificador", "Index", new { sortOrder = "identifierDesc" })
+            }
+            else
+            {
+                @Html.ActionLink("Identificador", "Index", new { sortOrder = "identifierAsc" })
+            }
+        </th>
+        <th>
+            @if (("projectDesc").Equals(ViewBag.SortOrder))
+            {
+                @Html.ActionLink("▼ Pre-Proyecto", "Index", new { sortOrder = "projectAsc" })
+            }
+            else if (("projectAsc").Equals(ViewBag.SortOrder))
+            {
+                @Html.ActionLink("▲ Pre-Proyecto", "Index", new { sortOrder = "projectDesc" })
+            }
+            else
+            {
+                @Html.ActionLink("Pre-Proyecto", "Index", new { sortOrder = "projectAsc" })
+            }
+        </th>
+        <th>
+            @if (("dateDesc").Equals(ViewBag.SortOrder))
+            {
+                @Html.ActionLink("▼ Fecha de creación", "Index", new { sortOrder = "dateAsc" })
+            }
+            else if (("dateAsc").Equals(ViewBag.SortOrder))
+            {
+                @Html.ActionLink("▲ Fecha de creación", "Index", new { sortOrder = "dateDesc" })
+            }
+            else
+            {
+                @Html.ActionLink("Fecha de creación", "Index", new { sortOrder = "dateAsc" })
+            }
+        </th>
+        @if (User.IsInRole("admin") || User.IsInRole("management") || User.IsInRole("sales-admin"))
+        {
+            <th></th>
+        }
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink(item.Identifier.ToString(), "Details", new { id = item.OrderId })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Preproject)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateCreated)
+        </td>
+        @if (User.IsInRole("admin") || User.IsInRole("management") || User.IsInRole("sales-admin"))
+        {
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id=item.OrderId }) |
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.OrderId }, new { @style = "color:red;" })
+            </td>
+        }
+    </tr>
+}
+
+</table>

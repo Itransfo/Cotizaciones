@@ -161,6 +161,8 @@
     <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrderProductsController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\StepsController.cs" />
@@ -240,11 +242,33 @@
     <Compile Include="Migrations\201502121714235_New version.Designer.cs">
       <DependentUpon>201502121714235_New version.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201502131910271_Order.cs" />
+    <Compile Include="Migrations\201502131910271_Order.Designer.cs">
+      <DependentUpon>201502131910271_Order.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201502132150025_Order Date.cs" />
+    <Compile Include="Migrations\201502132150025_Order Date.Designer.cs">
+      <DependentUpon>201502132150025_Order Date.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201502161450081_Order date fix.cs" />
+    <Compile Include="Migrations\201502161450081_Order date fix.Designer.cs">
+      <DependentUpon>201502161450081_Order date fix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201502171834390_Order Product.cs" />
+    <Compile Include="Migrations\201502171834390_Order Product.Designer.cs">
+      <DependentUpon>201502171834390_Order Product.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201502171839441_Order Product 2.cs" />
+    <Compile Include="Migrations\201502171839441_Order Product 2.Designer.cs">
+      <DependentUpon>201502171839441_Order Product 2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Clients.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderProduct.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Step.cs" />
     <Compile Include="Models\StepStakeholder.cs" />
@@ -340,9 +364,15 @@
     <Content Include="Views\Steps\Details.cshtml" />
     <Content Include="Views\Steps\Edit.cshtml" />
     <Content Include="Views\Steps\Index.cshtml" />
+    <Content Include="Views\Orders\Create.cshtml" />
+    <Content Include="Views\Orders\Delete.cshtml" />
+    <Content Include="Views\Orders\Details.cshtml" />
+    <Content Include="Views\Orders\Edit.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\OrderProducts\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -405,6 +435,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201502121714235_New version.resx">
       <DependentUpon>201502121714235_New version.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502131910271_Order.resx">
+      <DependentUpon>201502131910271_Order.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502132150025_Order Date.resx">
+      <DependentUpon>201502132150025_Order Date.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502161450081_Order date fix.resx">
+      <DependentUpon>201502161450081_Order date fix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502171834390_Order Product.resx">
+      <DependentUpon>201502171834390_Order Product.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502171839441_Order Product 2.resx">
+      <DependentUpon>201502171839441_Order Product 2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
