@@ -132,6 +132,11 @@ namespace Cotizaciones.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Client client = db.Clients.Find(id);
+            var orders = from o in db.Orders where o.Client.ClientId == id select o;
+            foreach (var order in orders.ToList())
+            {
+                db.Orders.Remove(order);
+            }
             db.Clients.Remove(client);
             db.SaveChanges();
             return RedirectToAction("Index");

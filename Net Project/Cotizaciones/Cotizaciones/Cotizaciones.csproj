@@ -159,6 +159,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrderProductsController.cs" />
@@ -262,6 +263,62 @@
     <Compile Include="Migrations\201502171839441_Order Product 2.Designer.cs">
       <DependentUpon>201502171839441_Order Product 2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201502172244569_Order Step Name.cs" />
+    <Compile Include="Migrations\201502172244569_Order Step Name.Designer.cs">
+      <DependentUpon>201502172244569_Order Step Name.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201502181540211_Step Change.cs" />
+    <Compile Include="Migrations\201502181540211_Step Change.Designer.cs">
+      <DependentUpon>201502181540211_Step Change.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201502191717480_Added step change.cs" />
+    <Compile Include="Migrations\201502191717480_Added step change.Designer.cs">
+      <DependentUpon>201502191717480_Added step change.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201502191723023_Added step change 2.cs" />
+    <Compile Include="Migrations\201502191723023_Added step change 2.Designer.cs">
+      <DependentUpon>201502191723023_Added step change 2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201502191746354_Added step change 3.cs" />
+    <Compile Include="Migrations\201502191746354_Added step change 3.Designer.cs">
+      <DependentUpon>201502191746354_Added step change 3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201502191759455_Added step change 4.cs" />
+    <Compile Include="Migrations\201502191759455_Added step change 4.Designer.cs">
+      <DependentUpon>201502191759455_Added step change 4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201502191808379_Added step change 5.cs" />
+    <Compile Include="Migrations\201502191808379_Added step change 5.Designer.cs">
+      <DependentUpon>201502191808379_Added step change 5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201502191811265_Added step change 6.cs" />
+    <Compile Include="Migrations\201502191811265_Added step change 6.Designer.cs">
+      <DependentUpon>201502191811265_Added step change 6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201502191817598_Added step change 7.cs" />
+    <Compile Include="Migrations\201502191817598_Added step change 7.Designer.cs">
+      <DependentUpon>201502191817598_Added step change 7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201502191820147_Added new step change.cs" />
+    <Compile Include="Migrations\201502191820147_Added new step change.Designer.cs">
+      <DependentUpon>201502191820147_Added new step change.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201502191821176_Added new step change 2.cs" />
+    <Compile Include="Migrations\201502191821176_Added new step change 2.Designer.cs">
+      <DependentUpon>201502191821176_Added new step change 2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201502191822360_Added new step change fix.cs" />
+    <Compile Include="Migrations\201502191822360_Added new step change fix.Designer.cs">
+      <DependentUpon>201502191822360_Added new step change fix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201502191828461_Fixed name steps in step change.cs" />
+    <Compile Include="Migrations\201502191828461_Fixed name steps in step change.Designer.cs">
+      <DependentUpon>201502191828461_Fixed name steps in step change.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201502191911445_Changed stepchange step from nullable int.cs" />
+    <Compile Include="Migrations\201502191911445_Changed stepchange step from nullable int.Designer.cs">
+      <DependentUpon>201502191911445_Changed stepchange step from nullable int.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Clients.cs" />
@@ -271,6 +328,7 @@
     <Compile Include="Models\OrderProduct.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Step.cs" />
+    <Compile Include="Models\StepChange.cs" />
     <Compile Include="Models\StepStakeholder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -279,6 +337,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\backArrow.png" />
+    <Content Include="Content\logo.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -369,6 +428,11 @@
     <Content Include="Views\Orders\Details.cshtml" />
     <Content Include="Views\Orders\Edit.cshtml" />
     <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\Dashboard\MyOrders.cshtml" />
+    <Content Include="Views\Dashboard\FillOrder.cshtml" />
+    <Content Include="Views\Orders\DetailsPartial.cshtml" />
+    <Content Include="Views\Orders\ProductsPartial.cshtml" />
+    <Content Include="Views\Orders\HistoryPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -450,6 +514,48 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201502171839441_Order Product 2.resx">
       <DependentUpon>201502171839441_Order Product 2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502172244569_Order Step Name.resx">
+      <DependentUpon>201502172244569_Order Step Name.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502181540211_Step Change.resx">
+      <DependentUpon>201502181540211_Step Change.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502191717480_Added step change.resx">
+      <DependentUpon>201502191717480_Added step change.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502191723023_Added step change 2.resx">
+      <DependentUpon>201502191723023_Added step change 2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502191746354_Added step change 3.resx">
+      <DependentUpon>201502191746354_Added step change 3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502191759455_Added step change 4.resx">
+      <DependentUpon>201502191759455_Added step change 4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502191808379_Added step change 5.resx">
+      <DependentUpon>201502191808379_Added step change 5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502191811265_Added step change 6.resx">
+      <DependentUpon>201502191811265_Added step change 6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502191817598_Added step change 7.resx">
+      <DependentUpon>201502191817598_Added step change 7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502191820147_Added new step change.resx">
+      <DependentUpon>201502191820147_Added new step change.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502191821176_Added new step change 2.resx">
+      <DependentUpon>201502191821176_Added new step change 2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502191822360_Added new step change fix.resx">
+      <DependentUpon>201502191822360_Added new step change fix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502191828461_Fixed name steps in step change.resx">
+      <DependentUpon>201502191828461_Fixed name steps in step change.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502191911445_Changed stepchange step from nullable int.resx">
+      <DependentUpon>201502191911445_Changed stepchange step from nullable int.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

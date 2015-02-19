@@ -52,11 +52,18 @@ namespace Cotizaciones.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Order order = db.Orders.Find(id);
-            ViewBag.OrderProducts = db.OrderProducts.ToList().Where(op => op.Order.OrderId == order.OrderId);
             if (order == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.StepChanges = order.StepChanges.ToList();
+            ViewBag.OrderProducts = db.OrderProducts.ToList().Where(op => op.Order.OrderId == order.OrderId);
+            var stepQuery = from s in db.Steps select s;
+            List<Step> steps = stepQuery.ToList();
+            Dictionary<int, string> stepNames = new Dictionary<int, string>();
+            foreach (Step s in steps)
+                stepNames.Add(s.StepId, s.getDisplayName());
+            ViewBag.StepNames = stepNames;
             return View(order);
         }
 
@@ -183,17 +190,18 @@ namespace Cotizaciones.Controllers
             try
             {
                 number = int.Parse(quantity);
+                Product product = db.Products.Find(productId);
+                OrderProduct orderProduct = new OrderProduct();
+                orderProduct.Order = order;
+                orderProduct.Product = product;
+                orderProduct.Quantity = number;
+                db.OrderProducts.Add(orderProduct);
+                db.SaveChanges();
             }
             catch
             {
+                
             }
-            Product product = db.Products.Find(productId);
-            OrderProduct orderProduct = new OrderProduct();
-            orderProduct.Order = order;
-            orderProduct.Product = product;
-            orderProduct.Quantity = number;
-            db.OrderProducts.Add(orderProduct);
-            db.SaveChanges();
             ViewBag.Clients = db.Clients.ToList();
             ViewBag.Products = db.Products.ToList();
             ViewBag.OrderProducts = db.OrderProducts.ToList().Where(op => op.Order.OrderId == order.OrderId);

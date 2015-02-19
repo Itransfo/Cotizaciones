@@ -31,9 +31,13 @@ namespace Cotizaciones.Models
 
         [Display(Name = "Recordatorio(hrs)")]
         public int Reminder { get; set; }
-
-
+        
         public virtual ICollection<StepStakeholder> StepStakeholders { get; set; }
+
+        public string getDisplayName()
+        {
+            return string.Format("{0} - {1}", Order, Name);
+        }
 
     }
 }

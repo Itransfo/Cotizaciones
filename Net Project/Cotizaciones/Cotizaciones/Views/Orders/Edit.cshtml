@@ -98,24 +98,27 @@
             </tr>
             }
             <tr>
-                @using (Html.BeginForm("AddOrderProduct", "Orders"))
-                {
-                    <td></td>
-                    <td>
-                        <input type="text" hidden="hidden" value="@Model.OrderId" name="orderId" id="orderId" />
-                        <select name="productId" id="productId" class="form-control">
-                            @foreach (Cotizaciones.Models.Product item in ViewBag.Products)
-                            {
-                                <option value="@item.ProductId">@item.Name</option>
-                            }
-                        </select>
-                    </td>
-                    <td>
-                        <input type="text" name="quantity" id="quantity" placeholder="0" class="form-control" />
-                    </td>
-                    <td>
-                        <input type="submit" value="Agregar" class="btn btn-success" />
-                    </td>
+                @if(ViewBag.Products != null && ViewBag.Products.Count != 0)
+                { 
+                    using (Html.BeginForm("AddOrderProduct", "Orders"))
+                    {
+                        <td></td>
+                        <td>
+                            <input type="text" hidden="hidden" value="@Model.OrderId" name="orderId" id="orderId" />
+                            <select name="productId" id="productId" class="form-control">
+                                @foreach (Cotizaciones.Models.Product item in ViewBag.Products)
+                                {
+                                    <option value="@item.ProductId">@item.Name</option>
+                                }
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" name="quantity" id="quantity" placeholder="0" class="form-control" />
+                        </td>
+                        <td>
+                            <input type="submit" value="Agregar" class="btn btn-success" />
+                        </td>
+                    }
                 }
             </tr>
 

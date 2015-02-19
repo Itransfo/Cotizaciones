@@ -30,5 +30,6 @@ namespace Cotizaciones.Models
         [Display(Name = "Paso Actual")]
         public virtual Step Step { get; set; }
 
+        public virtual ICollection<StepChange> StepChanges { get; set; }
     }
 }

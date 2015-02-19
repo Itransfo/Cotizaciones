@@ -1,0 +1,18 @@
+﻿@model Cotizaciones.Models.Order
+
+<table class="table-condensed">
+    <tr>
+        <th>Fabricante</th>
+        <th>Producto</th>
+        <th>Cantidad</th>
+    </tr>
+    @foreach (Cotizaciones.Models.OrderProduct item in ViewBag.OrderProducts)
+    {
+        <tr>
+            <td>@item.Product.Provider</td>
+            <td>@Html.ActionLink(item.Product.Name, "Details", "Products", new { @id = item.Product.ProductId }, null)</td>
+            <td>@item.Quantity</td>
+        </tr>
+    }
+</table>
+

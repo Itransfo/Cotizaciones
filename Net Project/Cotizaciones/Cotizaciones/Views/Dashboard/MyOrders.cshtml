@@ -1,0 +1,94 @@
+﻿@model IEnumerable<Cotizaciones.Models.Order>
+@{
+    ViewBag.Title = "Mis Órdenes";
+}
+
+<h2>Mis Órdenes</h2>
+
+<div class="row">
+    <table class="table">
+        <tr>
+            <th>
+                @if (("identifierDesc").Equals(ViewBag.SortOrder))
+                {
+                    @Html.ActionLink("▼ Identificador", "MyOrders", new { sortOrder = "identifierAsc" })
+                }
+                else if (("identifierAsc").Equals(ViewBag.SortOrder))
+                {
+                    @Html.ActionLink("▲ Identificador", "MyOrders", new { sortOrder = "identifierDesc" })
+                }
+                else
+                {
+                    @Html.ActionLink("Identificador", "MyOrders", new { sortOrder = "identifierAsc" })
+                }
+            </th>
+            <th>
+                @if (("stepDesc").Equals(ViewBag.SortOrder))
+                {
+                    @Html.ActionLink("▼ Paso Actual", "MyOrders", new { sortOrder = "stepAsc" })
+                }
+                else if (("stepAsc").Equals(ViewBag.SortOrder))
+                {
+                    @Html.ActionLink("▲ Paso Actual", "MyOrders", new { sortOrder = "stepDesc" })
+                }
+                else
+                {
+                    @Html.ActionLink("Paso Actual", "MyOrders", new { sortOrder = "stepAsc" })
+                }
+            </th>            
+            <th>
+                @if (("dateDesc").Equals(ViewBag.SortOrder))
+                {
+                    @Html.ActionLink("▼ Fecha de creación", "MyOrders", new { sortOrder = "dateAsc" })
+                }
+                else if (("dateAsc").Equals(ViewBag.SortOrder))
+                {
+                    @Html.ActionLink("▲ Fecha de creación", "MyOrders", new { sortOrder = "dateDesc" })
+                }
+                else
+                {
+                    @Html.ActionLink("Fecha de creación", "MyOrders", new { sortOrder = "dateAsc" })
+                }
+            </th>
+            <th>
+                @if (("timeDesc").Equals(ViewBag.SortOrder))
+                {
+                    @Html.ActionLink("▼ Estado", "MyOrders", new { sortOrder = "timeAsc" })
+                }
+                else if (("timeAsc").Equals(ViewBag.SortOrder))
+                {
+                    @Html.ActionLink("▲ Estado", "MyOrders", new { sortOrder = "timeDesc" })
+                }
+                else
+                {
+                    @Html.ActionLink("Estado", "MyOrders", new { sortOrder = "timeAsc" })
+                }
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            if(User.IsInRole(item.Step.Responsible))
+            { 
+                <tr>
+                    <td>
+                        @Html.ActionLink(item.Identifier.ToString(), "Details", "Orders", new { id = item.OrderId }, null)
+                    </td>
+                    <td>
+                        @item.Step.getDisplayName()
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateCreated)
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>
+                        @Html.ActionLink("Atender", "FillOrder", new { @id = item.OrderId }, new { @class = "btn btn-success"})
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+</div>

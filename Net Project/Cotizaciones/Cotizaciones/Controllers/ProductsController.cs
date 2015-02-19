@@ -145,6 +145,11 @@ namespace Cotizaciones.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Product product = db.Products.Find(id);
+            var orderProducts = from op in db.OrderProducts where op.Product.ProductId == id select op;
+            foreach(var orderProduct in orderProducts.ToList())
+            {
+                db.OrderProducts.Remove(orderProduct);
+            }
             db.Products.Remove(product);
             db.SaveChanges();
             return RedirectToAction("Index");

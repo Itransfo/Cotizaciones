@@ -1,0 +1,17 @@
+﻿<table class="table-condensed">
+    <tr>
+        <th>Paso anterior</th>
+        <th>Paso siguiente</th>
+        <th>Usuario</th>
+        <th>Fecha</th>
+    </tr>
+    @foreach (Cotizaciones.Models.StepChange item in ViewBag.StepChanges)
+    {
+        <tr>
+            <td>@ViewBag.StepNames[item.PreviousStepId]</td>
+            <td>@ViewBag.StepNames[item.NextStepId]</td>
+            <td>@item.User</td>
+            <td>@item.DateChanged</td>
+        </tr>
+    }
+</table>
