@@ -4,6 +4,7 @@
         <th>Paso siguiente</th>
         <th>Usuario</th>
         <th>Fecha</th>
+        <th>Comentarios</th>
     </tr>
     @foreach (Cotizaciones.Models.StepChange item in ViewBag.StepChanges)
     {
@@ -12,6 +13,17 @@
             <td>@ViewBag.StepNames[item.NextStepId]</td>
             <td>@item.User</td>
             <td>@item.DateChanged</td>
+            <td >
+                @foreach (Cotizaciones.Models.OrderComment comment in ViewBag.OrderComments)
+                {
+                    if(comment.Step.StepId.Equals(item.PreviousStepId))
+                    { 
+                        <div class="row" style="margin-left:5px">
+                            @Html.Raw(string.Format("{0}-{1}: {2}", comment.Date, comment.User, comment.Comment))
+                        </div>
+                    }
+                }
+            </td>
         </tr>
     }
 </table>

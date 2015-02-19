@@ -31,5 +31,7 @@ namespace Cotizaciones.Models
         public virtual Step Step { get; set; }
 
         public virtual ICollection<StepChange> StepChanges { get; set; }
+
+        public virtual ICollection<OrderComment> OrderComments { get; set; }
     }
 }

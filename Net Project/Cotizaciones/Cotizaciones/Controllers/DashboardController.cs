@@ -13,7 +13,22 @@ namespace Cotizaciones.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         
-        // GET: Dashboard
+        public Order fillData(int id)
+        {
+            var orderQuery = from o in db.Orders.Include("Step") where (o.OrderId.Equals(id)) select o;
+            Order order = orderQuery.ToList().ElementAt(0);
+            ViewBag.OrderProducts = db.OrderProducts.ToList().Where(op => op.Order.OrderId == order.OrderId);
+            ViewBag.StepChanges = order.StepChanges.ToList();
+            var stepQuery = from s in db.Steps select s;
+            List<Step> steps = stepQuery.ToList();
+            Dictionary<int, string> stepNames = new Dictionary<int, string>();
+            foreach (Step s in steps)
+                stepNames.Add(s.StepId, s.getDisplayName());
+            ViewBag.StepNames = stepNames;
+            ViewBag.OrderComments = order.OrderComments.ToList();
+            return order;
+        }
+                
         public ActionResult MyOrders(string sortOrder)
         {
             ViewBag.SortOrder = String.IsNullOrEmpty(sortOrder) ? "dateAsc" : sortOrder;
@@ -49,18 +64,8 @@ namespace Cotizaciones.Controllers
         }
 
         public ActionResult FillOrder(int id)
-        {
-            var orderQuery = from o in db.Orders.Include("Step") where (o.OrderId.Equals(id)) select o;
-            Order order = orderQuery.ToList().ElementAt(0);
-            ViewBag.OrderProducts = db.OrderProducts.ToList().Where(op => op.Order.OrderId == order.OrderId);
-            ViewBag.StepChanges = order.StepChanges.ToList();
-            var stepQuery = from s in db.Steps select s;
-            List<Step> steps = stepQuery.ToList();
-            Dictionary<int, string> stepNames = new Dictionary<int, string>();
-            foreach (Step s in steps)
-                stepNames.Add(s.StepId, s.getDisplayName());
-            ViewBag.StepNames = stepNames;
-            return View(order);
+        {            
+            return View(fillData(id));
         }
 
         [HttpPost]
@@ -101,6 +106,39 @@ namespace Cotizaciones.Controllers
                 return RedirectToAction("MyOrders");
             }
             return RedirectToAction("MyOrders");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SaveComment(int orderId, string comment)
+        {
+            //User is logged in
+            if (!User.Identity.IsAuthenticated || !User.IsInRole("authorized-user"))
+            {
+                return RedirectToAction("MyOrders");
+            }
+            //User is responsible for this step
+            Order order = fillData(orderId);
+            if (!User.IsInRole(order.Step.Responsible))
+            {
+                return RedirectToAction("MyOrders");
+            }
+            //Move to next step, if succesfull, record the change
+            try
+            {
+                OrderComment orderComment = new OrderComment();
+                orderComment.Date = DateTime.Now;
+                orderComment.Comment = comment;
+                orderComment.Step = order.Step;
+                orderComment.User = User.Identity.Name;
+                order.OrderComments.Add(orderComment);
+                db.SaveChanges();
+            }
+            catch
+            {
+                return RedirectToAction("FillOrder", new { @id = orderId });
+            }
+            return RedirectToAction("FillOrder", new { @id = orderId });
         }
 
     }

@@ -22,7 +22,7 @@
     <hr />
     <h4>Información a llenar</h4>
     <hr />
-    @using (Html.BeginForm("SaveData", "Dashboard"))
+    @using (Html.BeginForm("SaveComment", "Dashboard"))
     {
         @Html.AntiForgeryToken()
         <div class="form-horizontal">
@@ -32,7 +32,16 @@
                     Comentarios
                 </label>
                 <div class="col-md-10">
-                    <textarea class="form-control"></textarea>
+                    @foreach (Cotizaciones.Models.OrderComment comment in ViewBag.OrderComments)
+                    {
+                        if (comment.Step.StepId.Equals(Model.Step.StepId))
+                        {
+                            <div class="row" style="margin-left:5px">
+                                @Html.Raw(string.Format("{0}-{1}: {2}", comment.Date, comment.User, comment.Comment))
+                            </div>
+                        }
+                    }
+                    <textarea class="form-control" id="comment" name="comment"></textarea>
                     @Html.ValidationMessageFor(model => model.Identifier, "", new { @class = "text-danger" })
                 </div>
             </div>

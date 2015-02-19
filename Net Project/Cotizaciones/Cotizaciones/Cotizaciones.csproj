@@ -319,12 +319,25 @@
     <Compile Include="Migrations\201502191911445_Changed stepchange step from nullable int.Designer.cs">
       <DependentUpon>201502191911445_Changed stepchange step from nullable int.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201502192201054_Order comments.cs" />
+    <Compile Include="Migrations\201502192201054_Order comments.Designer.cs">
+      <DependentUpon>201502192201054_Order comments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201502192241197_Order comments date change.cs" />
+    <Compile Include="Migrations\201502192241197_Order comments date change.Designer.cs">
+      <DependentUpon>201502192241197_Order comments date change.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201502192242349_Added order comments to order.cs" />
+    <Compile Include="Migrations\201502192242349_Added order comments to order.Designer.cs">
+      <DependentUpon>201502192242349_Added order comments to order.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Clients.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderComment.cs" />
     <Compile Include="Models\OrderProduct.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Step.cs" />
@@ -433,6 +446,7 @@
     <Content Include="Views\Orders\DetailsPartial.cshtml" />
     <Content Include="Views\Orders\ProductsPartial.cshtml" />
     <Content Include="Views\Orders\HistoryPartial.cshtml" />
+    <Content Include="Views\Orders\CommentPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -556,6 +570,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201502191911445_Changed stepchange step from nullable int.resx">
       <DependentUpon>201502191911445_Changed stepchange step from nullable int.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502192201054_Order comments.resx">
+      <DependentUpon>201502192201054_Order comments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502192241197_Order comments date change.resx">
+      <DependentUpon>201502192241197_Order comments date change.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502192242349_Added order comments to order.resx">
+      <DependentUpon>201502192242349_Added order comments to order.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
