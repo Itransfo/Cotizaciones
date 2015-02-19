@@ -64,6 +64,7 @@ namespace Cotizaciones.Controllers
             foreach (Step s in steps)
                 stepNames.Add(s.StepId, s.getDisplayName());
             ViewBag.StepNames = stepNames;
+            ViewBag.OrderComments = order.OrderComments.ToList();
             return View(order);
         }
 

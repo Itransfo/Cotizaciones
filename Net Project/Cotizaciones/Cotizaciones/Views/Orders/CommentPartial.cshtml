@@ -1,0 +1,25 @@
+﻿
+<td>
+  
+</td>
+
+<table class="table-condensed">
+    <tr>
+        <th>Usuario</th>
+        <th>Paso en proceso</th>
+        <th>Fecha</th>
+        <th>Comentario</th>
+    </tr>
+    @foreach (Cotizaciones.Models.OrderComment comment in ViewBag.OrderComments)
+    {
+        <tr>
+            <td>@comment.User</td>
+            <td>@ViewBag.StepNames[item.NextStepId]</td>
+            <td>@item.User</td>
+            <td>@item.DateChanged</td>
+            <div class="row" style="margin-left:5px">
+                @Html.Raw(string.Format("{0}-{1}: {2}", comment.Date, comment.User, comment.Comment));
+            </div>
+        </tr>
+    }            
+</table>
