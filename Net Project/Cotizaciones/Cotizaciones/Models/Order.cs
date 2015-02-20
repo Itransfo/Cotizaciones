@@ -33,5 +33,25 @@ namespace Cotizaciones.Models
         public virtual ICollection<StepChange> StepChanges { get; set; }
 
         public virtual ICollection<OrderComment> OrderComments { get; set; }
+
+        public string onTime()
+        {
+            var stepChanges = StepChanges.Where(s => s.NextStepId.Equals(Step.StepId));
+            if (stepChanges.Count() > 0)
+            {
+                StepChange stepChange = stepChanges.ElementAt(0);
+                if (Step.Tolerance < (stepChange.DateChanged - DateTime.Now).Hours)
+                    return "Atrasado";
+                else
+                    return "A tiempo";
+            }
+            else
+            {
+                if (Step.Tolerance < (DateCreated - DateTime.Now).Hours)
+                    return "Atrasado";
+                else
+                    return "A tiempo";
+            }
+        }
     }
 }

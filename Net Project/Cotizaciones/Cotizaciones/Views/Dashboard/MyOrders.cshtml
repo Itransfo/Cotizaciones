@@ -82,7 +82,7 @@
                         @Html.DisplayFor(modelItem => item.DateCreated)
                     </td>
                     <td>
-
+                        @item.onTime()
                     </td>
                     <td>
                         @Html.ActionLink("Atender", "FillOrder", new { @id = item.OrderId }, new { @class = "btn btn-success"})

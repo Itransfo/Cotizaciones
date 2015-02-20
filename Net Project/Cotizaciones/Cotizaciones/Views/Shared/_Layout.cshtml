@@ -43,7 +43,7 @@
                         {
                             <li id="indexLink">
                                 @Html.ActionLink("Mis Órdenes", "MyOrders", "Dashboard")
-                                @if(!@Session["pendingOrders"].ToString().Equals("0"))
+                                @if (@Session["pendingOrders"] != null && !@Session["pendingOrders"].ToString().Equals("0"))
                                 {
                                     <div style="position:absolute; top:7px; left:95px; border-radius:50%; color:white;background-color:#BAE8D6;width:22px;height:22px;text-align:center;line-height:20px"></div>
                                     <div style="position:absolute; top:9px; left:97px; border-radius:50%; color:white;background-color:#379672;width:18px;height:18px;text-align:center;line-height:18px">@HttpContext.Current.Session["pendingOrders"]</div>
