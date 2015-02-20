@@ -100,6 +100,7 @@ namespace Cotizaciones.Controllers
                 stepChange.User = User.Identity.Name;
                 order.StepChanges.Add(stepChange);
                 db.SaveChanges();
+                Session["pendingOrders"] = orderQuery.ToList().Where(o => User.IsInRole(o.Step.Responsible)).Count();
             }
             catch
             {

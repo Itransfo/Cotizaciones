@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cotizaciones.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,8 +9,12 @@ namespace Cotizaciones.Controllers
 {
     public class HomeController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
+
         public ActionResult Index()
         {
+            var orders = db.Orders.Include("Step").ToList();
+            Session["pendingOrders"] = orders.ToList().Where(o => User.IsInRole(o.Step.Responsible)).Count();
             return View();
         }
 
@@ -26,5 +31,7 @@ namespace Cotizaciones.Controllers
 
             return View();
         }
+
+
     }
 }
