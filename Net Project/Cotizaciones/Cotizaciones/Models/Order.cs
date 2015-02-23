@@ -40,14 +40,14 @@ namespace Cotizaciones.Models
             if (stepChanges.Count() > 0)
             {
                 StepChange stepChange = stepChanges.ElementAt(0);
-                if (Step.Tolerance < (stepChange.DateChanged - DateTime.Now).Hours)
+                if (Step.Tolerance < (DateTime.Now - stepChange.DateChanged).TotalHours)
                     return "Atrasado";
                 else
                     return "A tiempo";
             }
             else
             {
-                if (Step.Tolerance < (DateCreated - DateTime.Now).Hours)
+                if (Step.Tolerance < (DateTime.Now - DateCreated).TotalHours)
                     return "Atrasado";
                 else
                     return "A tiempo";

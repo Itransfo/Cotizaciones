@@ -82,7 +82,14 @@
                         @Html.DisplayFor(modelItem => item.DateCreated)
                     </td>
                     <td>
-                        @item.onTime()
+                        @if (item.onTime().Equals("Atrasado"))
+                        {
+                            <div style="color:red">Atrasado</div>
+                        }
+                        else
+                        {
+                            <div style="color:green">A tiempo</div>
+                        }
                     </td>
                     <td>
                         @Html.ActionLink("Atender", "FillOrder", new { @id = item.OrderId }, new { @class = "btn btn-success"})

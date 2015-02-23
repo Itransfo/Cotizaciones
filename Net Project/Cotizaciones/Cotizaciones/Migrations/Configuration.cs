@@ -40,6 +40,8 @@ namespace Cotizaciones.Migrations
                         Name = "Recibir la solicitud",
                         Value = 1,
                         Responsible = "sales-admin",
+                        Tolerance = 48,
+                        Reminder = 24,
                     }
                     , new Cotizaciones.Models.Step
                     {
@@ -47,6 +49,8 @@ namespace Cotizaciones.Migrations
                         Name = "Contactar al cliente",
                         Value = 2,
                         Responsible = "sales-admin",
+                        Tolerance = 48,
+                        Reminder = 24,
                     }
                     , new Cotizaciones.Models.Step
                     {
@@ -54,6 +58,8 @@ namespace Cotizaciones.Migrations
                         Name = "Clasificar al cliente",
                         Value = 3,
                         Responsible = "sales-admin",
+                        Tolerance = 48,
+                        Reminder = 24,
                     }
                     , new Cotizaciones.Models.Step
                     {
@@ -61,6 +67,8 @@ namespace Cotizaciones.Migrations
                         Name = "Identificar la necesidad del cliente",
                         Value = 4,
                         Responsible = "sales-admin",
+                        Tolerance = 48,
+                        Reminder = 24,
                     }
                     , new Cotizaciones.Models.Step
                     {
@@ -68,6 +76,8 @@ namespace Cotizaciones.Migrations
                         Name = "Elaborar la propuesta técnica de operaciones",
                         Value = 5,
                         Responsible = "operations-admin",
+                        Tolerance = 48,
+                        Reminder = 24,
                     }
                     , new Cotizaciones.Models.Step
                     {
@@ -75,6 +85,8 @@ namespace Cotizaciones.Migrations
                         Name = "Elaborar la propuesta de logística",
                         Value = 6,
                         Responsible = "logistics-admin",
+                        Tolerance = 48,
+                        Reminder = 24,
                     }
                     , new Cotizaciones.Models.Step
                     {
@@ -82,6 +94,8 @@ namespace Cotizaciones.Migrations
                         Name = "Elaborar la propuesta de finanzas",
                         Value = 7,
                         Responsible = "finance-admin",
+                        Tolerance = 48,
+                        Reminder = 24,
                     }
                     , new Cotizaciones.Models.Step
                     {
@@ -89,6 +103,8 @@ namespace Cotizaciones.Migrations
                         Name = "Elaborar la propuesta comercial",
                         Value = 8,
                         Responsible = "sales-admin",
+                        Tolerance = 48,
+                        Reminder = 24,
                     }
                     , new Cotizaciones.Models.Step
                     {
@@ -96,6 +112,8 @@ namespace Cotizaciones.Migrations
                         Name = "Entregar la cotización",
                         Value = 9,
                         Responsible = "sales-admin",
+                        Tolerance = 48,
+                        Reminder = 24,
                     }
                     , new Cotizaciones.Models.Step
                     {
@@ -103,6 +121,8 @@ namespace Cotizaciones.Migrations
                         Name = "Standby",
                         Value = 0,
                         Responsible = "none",
+                        Tolerance = int.MaxValue,
+                        Reminder = int.MaxValue,
                     }
                 );
                 context.Clients.AddOrUpdate(p => p.Name,
