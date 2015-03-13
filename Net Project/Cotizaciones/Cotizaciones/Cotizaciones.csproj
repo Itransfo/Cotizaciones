@@ -40,6 +40,21 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MigraDoc.DocumentObjectModel-WPF">
+      <HintPath>..\packages\PDFsharp-MigraDoc-WPF.1.32.2608.0\lib\net20\MigraDoc.DocumentObjectModel-WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.Rendering-WPF">
+      <HintPath>..\packages\PDFsharp-MigraDoc-WPF.1.32.2608.0\lib\net20\MigraDoc.Rendering-WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.RtfRendering-WPF">
+      <HintPath>..\packages\PDFsharp-MigraDoc-WPF.1.32.2608.0\lib\net20\MigraDoc.RtfRendering-WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp-WPF">
+      <HintPath>..\packages\PDFsharp-MigraDoc-WPF.1.32.2608.0\lib\net20\PdfSharp-WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Charting-WPF">
+      <HintPath>..\packages\PDFsharp-MigraDoc-WPF.1.32.2608.0\lib\net20\PdfSharp.Charting-WPF.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -160,10 +175,13 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\PDFController.cs" />
+    <Compile Include="Models\DocumentContent.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrderProductsController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Controllers\PDFUtil.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\StepsController.cs" />
@@ -349,6 +367,8 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\footerPicture.PNG" />
+    <Content Include="Content\Images\headerPicture.png" />
     <Content Include="Content\Images\backArrow.png" />
     <Content Include="Content\logo.png" />
     <Content Include="favicon.ico" />
@@ -447,6 +467,7 @@
     <Content Include="Views\Orders\ProductsPartial.cshtml" />
     <Content Include="Views\Orders\HistoryPartial.cshtml" />
     <Content Include="Views\Orders\CommentPartial.cshtml" />
+    <Content Include="Views\PDF\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
