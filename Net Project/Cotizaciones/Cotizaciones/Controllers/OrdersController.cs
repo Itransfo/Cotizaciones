@@ -196,7 +196,8 @@ namespace Cotizaciones.Controllers
                 orderProduct.Order = order;
                 orderProduct.Product = product;
                 orderProduct.Quantity = number;
-                db.OrderProducts.Add(orderProduct);
+                order.OrderProducts.Add(orderProduct);
+                //db.OrderProducts.Add(orderProduct);
                 db.SaveChanges();
             }
             catch

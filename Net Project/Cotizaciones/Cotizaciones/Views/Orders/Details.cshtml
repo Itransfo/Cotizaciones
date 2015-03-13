@@ -8,10 +8,14 @@
     <div class="col-md-1" style="margin-top:20px;">
         @Html.ActionLink("Index", "Index", null, new { @class = "backButton" })
     </div>
-    <div class="col-md-8">
+    <div class="col-md-6">
         <h2>@string.Format("Orden {0}",Model.Identifier)</h2>
     </div>
-    <div class="col-md-2" style="float:right; margin-bottom: 5px; margin-top:15px;">
+    <div class="col-md-4" style="float:right; margin-bottom: 5px; margin-top:15px;">
+        @if (User.IsInRole("admin") || User.IsInRole("management") || User.IsInRole("sales-admin"))
+        {
+            @Html.ActionLink("PDF", "fromOrder", "PDF", new { orderId = Model.OrderId }, new { @class = "btn btn-success" })
+        }
         @if (User.IsInRole("admin") || User.IsInRole("management") || User.IsInRole("sales-admin"))
         {
             @Html.ActionLink("Editar", "Edit", new { id = Model.OrderId }, new { @class = "btn btn-primary" })

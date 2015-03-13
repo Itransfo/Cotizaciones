@@ -176,6 +176,14 @@
     <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\PDFController.cs" />
+    <Compile Include="Migrations\201503132110564_Changed order identifier to string.cs" />
+    <Compile Include="Migrations\201503132110564_Changed order identifier to string.Designer.cs">
+      <DependentUpon>201503132110564_Changed order identifier to string.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503132123538_Added orderproducts as order property.cs" />
+    <Compile Include="Migrations\201503132123538_Added orderproducts as order property.Designer.cs">
+      <DependentUpon>201503132123538_Added orderproducts as order property.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\DocumentContent.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -600,6 +608,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201502192242349_Added order comments to order.resx">
       <DependentUpon>201502192242349_Added order comments to order.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503132110564_Changed order identifier to string.resx">
+      <DependentUpon>201503132110564_Changed order identifier to string.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503132123538_Added orderproducts as order property.resx">
+      <DependentUpon>201503132123538_Added orderproducts as order property.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

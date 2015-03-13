@@ -52,5 +52,60 @@ namespace Cotizaciones.Controllers
             }
 
         }
+
+        public ActionResult fromOrder(int orderId)
+        {
+            Order order = db.Orders.Find(orderId);
+            DocumentContent documentContent = new DocumentContent();
+            documentContent.title = order.Identifier;
+            documentContent.fileName = order.Identifier + ".pdf";
+            documentContent.author = User.Identity.Name;
+            Client client = order.Client;
+            documentContent.clientFullName = client.getFullName();
+            documentContent.clientCompany = client.Company;
+            documentContent.clientPhoneNumber = client.Phone;
+            documentContent.clientPhoneExtension = client.Extension.ToString();
+            documentContent.clientEmail = client.Email;
+            documentContent.date = DateTime.Now.ToString("dd/MM/yyyy");
+            documentContent.validUntilDate = DateTime.Now.AddDays(90).ToString("dd/MM/yyyy");
+
+            int itemCount = 1;
+            foreach (OrderProduct orderProduct in order.OrderProducts)
+            {
+                DocumentItem documentItem = new DocumentItem();
+                documentItem.item = itemCount.ToString("D3");
+                documentItem.description = orderProduct.Product.Name;
+                documentItem.description += orderProduct.Product.AdditionalData != null ? orderProduct.Product.AdditionalData : string.Empty;
+                documentItem.quantity = ((int)orderProduct.Quantity).ToString("D2");
+                documentItem.unitPrice = "$"+orderProduct.Product.ProviderPrice.ToString();
+                documentItem.price = "$" + (orderProduct.Product.ProviderPrice * orderProduct.Quantity).ToString();
+                documentContent.items.Add(documentItem);
+                itemCount++;
+            }
+
+            //Not yet implemented
+            documentContent.currency = "Dólares Estadounidenses";
+            //Not yet implemented - Get dollar rate
+            documentContent.changeRate = "15.2000";
+            documentContent.payConditions = "Contado con la O.C.";
+            //Not yet implemented
+            documentContent.deliveryTime = "90 días naturales";
+            documentContent.deliveryPlace = client.Address != null ? client.Address : string.Empty;
+            //Not yet implemented
+            documentContent.totalCurrency = "TOTAL USD.";
+            documentContent.total = order.getTotal().ToString();
+            //Not yet implemented
+            documentContent.totalWritten = "IMPORTE CON LETRA:";
+            //Not yet implemented
+            documentContent.taxNote = "I.V.A. NO INCLUIDO";
+
+            PDFUtil pdfUtil = new PDFUtil(documentContent);
+            using (MemoryStream stream = new MemoryStream())
+            {
+                var document = pdfUtil.getPDFDocument();
+                document.Save(stream, false);
+                return File(stream.ToArray(), "application/pdf");
+            }
+        }
     }
 }

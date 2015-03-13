@@ -12,7 +12,7 @@ namespace Cotizaciones.Models
 
         [Required(ErrorMessage = "Este campo es requerido")]
         [Display(Name = "Identificador")]
-        public Nullable<int> Identifier { get; set; }
+        public string Identifier { get; set; }
 
         [Display(Name = "Pre-Proyecto")]
         public Nullable<int> Preproject { get; set; }
@@ -34,6 +34,8 @@ namespace Cotizaciones.Models
 
         public virtual ICollection<OrderComment> OrderComments { get; set; }
 
+        public virtual ICollection<OrderProduct> OrderProducts { get; set; }
+
         public string onTime()
         {
             var stepChanges = StepChanges.Where(s => s.NextStepId.Equals(Step.StepId));
@@ -52,6 +54,17 @@ namespace Cotizaciones.Models
                 else
                     return "A tiempo";
             }
+        }
+
+        public decimal getTotal()
+        {
+            decimal result = 0;
+            foreach(OrderProduct orderProduct in OrderProducts)
+            {
+                if (orderProduct.Product.ProviderPrice != null)
+                    result += (decimal) (orderProduct.Quantity * orderProduct.Product.ProviderPrice);
+            }
+            return result;
         }
     }
 }
