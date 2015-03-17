@@ -74,7 +74,7 @@ namespace Cotizaciones.Controllers
             {
                 DocumentItem documentItem = new DocumentItem();
                 documentItem.item = itemCount.ToString("D3");
-                documentItem.description = orderProduct.Product.Name;
+                documentItem.description = orderProduct.Product.Name += "\n";
                 documentItem.description += orderProduct.Product.AdditionalData != null ? orderProduct.Product.AdditionalData : string.Empty;
                 documentItem.quantity = ((int)orderProduct.Quantity).ToString("D2");
                 documentItem.unitPrice = "$"+orderProduct.Product.ProviderPrice.ToString();
