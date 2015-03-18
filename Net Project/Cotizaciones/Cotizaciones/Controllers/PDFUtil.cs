@@ -57,6 +57,7 @@ namespace Cotizaciones.Controllers
             textFrame.Left = ShapePosition.Left;
             textFrame.WrapFormat.Style = WrapStyle.None;
             textFrame.AddParagraph();
+            section.AddParagraph();
             Paragraph paragraph = section.AddParagraph();
             paragraph.Format.Font.Size = "10pt";
             paragraph.Format.Font.Name = "Arial";

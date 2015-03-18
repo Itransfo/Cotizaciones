@@ -94,8 +94,12 @@ namespace Cotizaciones.Controllers
             //Not yet implemented
             documentContent.totalCurrency = "TOTAL USD.";
             documentContent.total = order.getTotal().ToString();
-            //Not yet implemented
-            documentContent.totalWritten = "IMPORTE CON LETRA:";
+            //https://varionet.wordpress.com/2007/11/29/convertir-numeros-a-letras/
+            Numalet let = new Numalet();
+            let.MascaraSalidaDecimal = "00/100";
+            let.SeparadorDecimalSalida = "USD";
+            let.ApocoparUnoParteEntera = true;
+            documentContent.totalWritten = "IMPORTE CON LETRA: "+let.ToCustomCardinal(order.getTotal().ToString()).ToUpper();
             //Not yet implemented
             documentContent.taxNote = "I.V.A. NO INCLUIDO";
 
