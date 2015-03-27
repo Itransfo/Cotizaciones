@@ -73,7 +73,7 @@ namespace Cotizaciones.Migrations
                     , new Cotizaciones.Models.Step
                     {
                         Order = 5,
-                        Name = "Elaborar la propuesta técnica de operaciones",
+                        Name = "Elaborar la propuesta tÃ©cnica de operaciones",
                         Value = 5,
                         Responsible = "operations-admin",
                         Tolerance = 48,
@@ -82,7 +82,7 @@ namespace Cotizaciones.Migrations
                     , new Cotizaciones.Models.Step
                     {
                         Order = 6,
-                        Name = "Elaborar la propuesta de logística",
+                        Name = "Elaborar la propuesta de logÃ­stica",
                         Value = 6,
                         Responsible = "logistics-admin",
                         Tolerance = 48,
@@ -109,7 +109,7 @@ namespace Cotizaciones.Migrations
                     , new Cotizaciones.Models.Step
                     {
                         Order = 9,
-                        Name = "Entregar la cotización",
+                        Name = "Entregar la cotizaciÃ³n",
                         Value = 9,
                         Responsible = "sales-admin",
                         Tolerance = 48,
@@ -183,7 +183,7 @@ namespace Cotizaciones.Migrations
             {
                 UserName = "jose.franco@itransfo.com",
             };
-            ir = um.Create(user, "2153680");
+            ir = um.Create(user, "itransfo2015");
             if (ir.Succeeded == false)
                 return ir.Succeeded;
             ir = um.AddToRole(user.Id, "admin");
